@@ -1,47 +1,37 @@
 import os
 import sys
-import pickle
 
-# Đảm bảo terminal in được tiếng Việt UTF-8 không lỗi trên Windows
-sys.stdout.reconfigure(encoding='utf-8')
+# Thêm src vào path
+sys.path.append(os.path.dirname(os.path.abspath(__file__)))
 
-from load_data import load_data
-from build_graph import build_graph
-from select_hub import select_hub
-from routing import routing
-from evaluation import evaluation
-from simulation import simulation
+from modules.hub.service import HubService
+from modules.routing.service import RoutingService
+from modules.analytics.service import AnalyticsService
+from modules.simulation.service import SimulationService
+from core.logger import get_logger
+
+logger = get_logger("MainPipeline")
 
 
 def main():
-    os.makedirs("results", exist_ok=True)
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8')
 
-    # Cập nhật nhận thêm biến dữ liệu metro_edges từ load_data()
-    metro, metro_edges, waterbus, hubs, orders = load_data()
-    if metro is None:
-        print("[!] Lỗi nạp dữ liệu. Kết thúc Pipeline.")
-        return
-
-    graph_path = "results/multimodal_graph.pkl"
-    G = None
-    if os.path.exists(graph_path):
-        try:
-            with open(graph_path, 'rb') as f:
-                G = pickle.load(f)
-            print("[2/7] Graph loaded from cache.")
-        except Exception:
-            print("[!] Cache lỗi hoặc cấu trúc cũ không khớp. Tiến hành tạo lại Graph...")
-            os.remove(graph_path)
-
-    if G is None:
-        # Cập nhật truyền đồng bộ metro_edges, hubs và orders vào để xây dựng đồ thị động
-        G = build_graph(metro, metro_edges, waterbus, hubs, orders, graph_path)
-
-    selected_hubs = select_hub(hubs, orders)
-    routing_results = routing(G, orders, selected_hubs)
-    evaluation(routing_results)
-    simulation()
-    print("[7/7] Pipeline Hoàn Thành!")
+    logger.info("=== Bắt đầu Pipeline Tối ưu hóa Logistics (Modular Monolith Architecture) ===")
+    
+    # Bước 1 & 2 & 3: Chọn Hub
+    HubService.select_optimal_hubs(num_hubs=5)
+    
+    # Bước 4: Routing Dijkstra
+    RoutingService.execute_routing()
+    
+    # Bước 5: Đánh giá KPI & Phát thải CO2
+    AnalyticsService.evaluate_kpi_metrics()
+    
+    # Bước 6: Mô phỏng Sự kiện ABM SimPy
+    SimulationService.execute_simulation()
+    
+    logger.info("=== Pipeline Hoàn Thành 7/7 Bước Thành Công! ===")
 
 
 if __name__ == "__main__":

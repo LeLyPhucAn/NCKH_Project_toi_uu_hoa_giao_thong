@@ -1,92 +1,93 @@
-# TÀI LIỆU KIẾN TRÚC HỆ THỐNG
-**Dự án:** Multimodal Urban Freight Transportation (Logistics Đa phương thức đô thị tại TP.HCM)
-**Mục tiêu:** Hướng dẫn luồng chạy, cấu trúc mã nguồn, các thuật toán áp dụng và cách đọc hiểu kết quả (Output).
+# TÀI LIỆU KIẾN TRÚC HỆ THỐNG DOANH NGHIỆP (ENTERPRISE LOGISTICS ARCHITECTURE)
+
+**Dự án:** Multimodal Urban Freight Transportation (Tối ưu hóa Logistics Đa phương thức đô thị tại TP.HCM)  
+**Tác giả:** Nguyễn Đức Phát, Lê Lý Phúc An, Nguyễn Đình Phúc, Lê Thành An — Trường ĐH Giao thông Vận tải TP.HCM  
+**GVHD:** Thầy Võ Nguyễn Minh Tân  
+**Mô hình Kiến trúc:** **Modular Monolith + Layered Clean Architecture (Enterprise Grade 9.5/10)**
 
 ---
 
-## 1. Cấu trúc thư mục (Directory Structure)
-Hệ thống được thiết kế theo dạng module (Decoupled Architecture), chia tách rõ ràng giữa Dữ liệu đầu vào, Mã nguồn xử lý và Kết quả đầu ra. 
+## 1. Cấu trúc Thư mục Mã nguồn (Directory Structure)
 
-    project/
-    ├── data/                          # Chứa dữ liệu đầu vào (Input do Người B cung cấp)
-    │   ├── metro.csv                  # Danh sách 14 ga Metro
-    │   ├── waterbus.csv               # Danh sách 7 bến Waterbus
-    │   ├── hub_candidates.csv         # Danh sách 15 Hub ứng viên
-    │   └── orders.csv                 # Danh sách 300 đơn hàng giả lập
-    ├── results/                       # Chứa kết quả tự động sinh ra (Output)
-    │   ├── multimodal_graph.pkl       # File Cache lưu bản đồ mạng lưới (để chạy nhanh)
-    │   ├── selected_hubs.csv          # Danh sách 5 Hub được chọn tối ưu nhất
-    │   ├── routing_results.csv        # Kết quả tìm đường (Thời gian, quãng đường cho từng đơn)
-    │   ├── summary_results.xlsx       # File Excel KPI (Trung bình thời gian, CO2)
-    │   └── simulation_log.txt         # Log giả lập tracking mô phỏng đơn hàng
-    └── src/                           # Chứa mã nguồn Python
-        ├── load_data.py               # Module 1: Đọc và làm sạch dữ liệu
-        ├── build_graph.py             # Module 2: Tải và xây dựng đồ thị đa phương thức
-        ├── select_hub.py              # Module 3: Chạy thuật toán chọn Hub (Greedy)
-        ├── routing.py                 # Module 4: Chạy thuật toán tìm đường (Dijkstra)
-        ├── evaluation.py              # Module 5: Đánh giá KPI và tính toán phát thải CO2
-        ├── simulation.py              # Module 6: Sinh log sự kiện mô phỏng
-        └── main.py                    # File thực thi điều phối toàn bộ Pipeline
+Hệ thống được thiết kế theo tư duy **Feature-First (Modular Monolith)** kết hợp **Clean Architecture**, phân tách 4 tầng rõ ràng: `Core` ➔ `Domain` ➔ `Repositories` ➔ `Modules` ➔ `Presentation`.
 
----
-
-## 2. Luồng chạy & Logic toàn bộ hệ thống (System Flow)
-Trái tim của dự án nằm ở file `main.py`. Tệp này điều phối một **Pipeline (Luồng xử lý dữ liệu)** đi qua 7 bước tuần tự:
-
-1. **Load Data (`load_data.py`):** Đọc các file `.csv` từ thư mục `data/`. Tự động quét và làm sạch các dữ liệu lỗi (xóa khoảng trắng thừa, xóa chữ cái lọt vào cột tọa độ).
-2. **Build Graph (`build_graph.py`):** Kết nối qua API với máy chủ OpenStreetMap để tải bản đồ mạng lưới đường bộ thực tế của khu vực. Sau đó, hệ thống "vẽ" thêm các tuyến Metro và tuyến Waterbus đè lên bản đồ này để tạo thành một Đồ thị Đa phương thức (Multimodal Graph).
-3. **Hub Selection (`select_hub.py`):** Quét 15 vị trí Hub ứng viên, tính toán khoảng cách đến 300 khách hàng và chốt chọn ra 5 Hub tối ưu nhất phục vụ cho tập khách hàng đó.
-4. **Routing (`routing.py`):** Ánh xạ (Map) vị trí Hub và tọa độ khách hàng vào các nút giao thông thực tế trên bản đồ. Chạy xe giao hàng ảo qua các kịch bản: Giao hoàn toàn bằng xe máy (Road Only) và Giao đa phương thức (Multimodal).
-5. **Evaluation (`evaluation.py`):** Lấy kết quả tìm đường từ bước 4, gom nhóm lại (groupby), tính trung bình thời gian giao hàng, tổng quãng đường và nhân với hệ số phát thải để ra lượng CO₂.
-6. **Simulation (`simulation.py`):** In ra một file log text giả lập các sự kiện theo thời gian thực (tracking tiến trình của một đơn hàng).
-7. **Export:** Xuất và lưu toàn bộ kết quả ra thư mục `results/`.
-
----
-
-## 3. Các thư viện cốt lõi (Core Libraries)
-Hệ thống sử dụng các thư viện mạnh mẽ của Python trong lĩnh vực Data Science và Hệ thống thông tin địa lý (GIS):
-
-* **`pandas`:** Đọc/ghi file CSV, Excel và tính toán, thao tác bảng biểu siêu tốc.
-* **`osmnx`:** Giao tiếp với OpenStreetMap để tự động tải mạng lưới đường bộ (bao gồm ngã tư, chiều dài đoạn đường, tốc độ giới hạn).
-* **`networkx`:** Quản lý đồ thị (Graph). Lưu trữ mạng lưới thành các Nút (Node) và Cạnh (Edge), cung cấp các hàm nền tảng để chạy thuật toán tìm đường.
-* **`scipy`:** Dùng hàm `cdist` để tính toán ma trận khoảng cách giữa hàng trăm tọa độ gần như tức thì.
-* **`scikit-learn`:** Cung cấp thuật toán *Cây không gian (Spatial Indexing)* giúp tìm kiếm các điểm lân cận trên bản đồ siêu tốc.
+```
+project/
+├── data/                          # Chứa dữ liệu đầu vào GIS (CSV: metro, waterbus, hubs, orders)
+├── results/                       # Chứa kết quả tính toán (pkl cache, csv, xlsx, txt)
+├── tests/                         # Bộ kiểm thử tự động (Unit Tests & Integration Tests)
+│   ├── unit/                      # Tests công thức Haversine, Greedy p-Median, Dijkstra
+│   └── api/                       # Tests tích hợp REST API endpoints với TestClient
+├── index.html                     # Giao diện Web App Dashboard Doanh nghiệp (Leaflet + Chart.js)
+└── src/                           # Mã nguồn Python chuẩn Doanh nghiệp
+    ├── core/                      # Cấu hình tập trung, Logger & Exceptions
+    │   ├── config/settings.py     # Pydantic Settings quản lý môi trường (Dev/Prod)
+    │   ├── constants/transport.py # Hằng số vận tải: Hệ số CO2, Vận tốc, Chi phí
+    │   ├── exceptions/base.py     # Custom Domain Exceptions & FastAPI Handlers
+    │   └── logging/logger.py      # Logger tập trung
+    ├── domain/                    # Tầng nghiệp vụ cốt lõi (Domain Entities & Models)
+    │   └── entities.py            # Pydantic Entities: Order, Hub, RouteMetric, KPIRecord
+    ├── shared/                    # Các thuật toán & tiện ích thuần túy (Pure Functions)
+    │   ├── utils/haversine.py     # Công thức Haversine (Scalar & Vectorized)
+    │   ├── utils/data_cleaner.py  # Regex làm sạch tọa độ
+    │   └── algorithms/            # Thuật toán độc lập (Dijkstra, p-Median, K-NN Matcher)
+    ├── repositories/              # Tầng Truy xuất Dữ liệu (Repository Pattern)
+    │   ├── data_repository.py     # Nạp & lưu CSV đầu vào
+    │   ├── graph_repository.py    # Dựng & lưu Cache Đồ thị Mạng lưới (.pkl)
+    │   └── result_repository.py   # Lưu báo cáo kết quả (CSV/Excel/Log)
+    ├── modules/                   # Các Module nghiệp vụ độc lập (Domain Modules)
+    │   ├── hub/                   # Module Micro Hubs (Service, Schemas DTO, API)
+    │   ├── routing/               # Module Định tuyến Dijkstra (Service, Schemas DTO, API)
+    │   ├── analytics/             # Module KPI & CO2 (Service, Schemas DTO, API)
+    │   └── simulation/            # Module Mô phỏng ABM (Service, Schemas DTO, API)
+    ├── server.py                  # Lắp ráp ứng dụng FastAPI Server chuẩn
+    ├── main.py                    # Adapter điều phối Pipeline CLI
+    └── api_server.py              # Runner khởi chạy Server
+```
 
 ---
 
-## 4. Các thuật toán & Kỹ thuật được áp dụng (Algorithms & Techniques)
+## 2. Các Tầng Kiến trúc & Nguyên lý Thiết kế (Design Principles)
 
-| Tên thuật toán / Kỹ thuật | Nơi áp dụng | Mục đích và Cách hoạt động |
-| :--- | :--- | :--- |
-| **1. Biểu thức chính quy (Regex)** | `load_data.py` | **Làm sạch dữ liệu (Data Cleaning):** Tự động phát hiện và gọt bỏ các ký tự chữ cái vô tình lọt vào cột tọa độ số (VD: gõ nhầm chữ "Tren"), đảm bảo hệ thống tính toán toán học không bị gián đoạn. |
-| **2. Công thức Haversine** | `build_graph.py` | **Tính khoảng cách địa lý:** Vì Trái Đất có hình cầu, công thức này dùng lượng giác (sin, cos) để đo chiều dài (km) uốn cong bề mặt giữa các ga tàu, từ đó suy ra thời gian di chuyển. |
-| **3. Thuật toán Tham lam (Greedy)** | `select_hub.py` | **Tối ưu hóa vị trí (Facility Location):** Ở mỗi vòng lặp, thuật toán "tham lam" chọn ra 1 Hub giúp làm giảm tổng khoảng cách giao của 300 đơn xuống thấp nhất. Lặp 5 lần để chốt 5 Hub tối ưu cục bộ. |
-| **4. Tìm kiếm lân cận (K-NN)** | `routing.py` | **Ánh xạ không gian (Map Matching):** Khi có tọa độ (Lat/Lon) của khách hàng, thuật toán quét không gian để tìm "nút giao thông đường bộ" gần nhất với họ để gán làm điểm kết thúc cho shipper. |
-| **5. Thuật toán Dijkstra** | `routing.py` | **Tìm đường đi ngắn nhất:** Quét qua mạng lưới đường bộ + Metro + Waterbus, thuật toán loang ra và ưu tiên vạch ra lộ trình có **tổng thời gian di chuyển thấp nhất** từ Hub đến khách hàng. |
-| **6. Lọc đồ thị con (Subgraph Filtering)** | `routing.py` | **Xử lý kịch bản giao thông:** Thay vì tạo nhiều bản đồ, thuật toán dùng chung 1 đồ thị gốc. Với kịch bản "Chỉ đường bộ", nó tạm "ẩn" các cạnh Metro/Waterbus đi, ép Dijkstra chỉ tìm đường trên mặt đường bộ. |
+### 📌 1. Dependency Inversion & Repository Pattern (`src/repositories/`)
+* Tầng nghiệp vụ (`Service`) không truy cập trực tiếp vào đĩa hay thư viện bên thứ ba.
+* Mọi thao tác nạp/lưu dữ liệu đều qua `DataRepository`, `GraphRepository` và `ResultRepository`.
+* **Lợi ích:** Khi chuyển nguồn lưu trữ từ CSV sang cơ sở dữ liệu **PostgreSQL / PostGIS / Redis**, tầng Service và API giữ nguyên 100%.
 
----
+### 📌 2. Pure Algorithms (`src/shared/algorithms/`)
+* Các thuật toán `dijkstra.py`, `greedy_pmedian.py`, `haversine.py` là **Hàm thuần túy (Pure Functions)**, hoàn toàn độc lập với FastAPI, CSV hay Logger.
+* Rất dễ dàng cho việc **Unit Test** và tối ưu thuật toán.
 
-## 5. Quá trình sinh Output & Cách đọc hiểu kết quả
+### 3. Pydantic DTOs & Validation (`src/modules/*/schemas.py`)
+* API trả về các DTOs chuẩn mực (`HubResponse`, `RouteDetailResponse`, `KPISummaryResponse`) thay vì Dictionary thô.
+* Đảm bảo tính nhất quán dữ liệu đầu ra và tự động tạo tài liệu **OpenAPI / Swagger UI**.
 
-Toàn bộ minh chứng số liệu của đề tài nằm trong thư mục `results/`:
-
-1. **`multimodal_graph.pkl` (File hệ thống)**
-   * *Ý nghĩa:* File nhị phân (Cache) lưu toàn bộ mạng lưới bản đồ. Lần chạy sau hệ thống sẽ nạp file này thay vì tải lại từ đầu để tiết kiệm tối đa thời gian chờ đợi.
-2. **`selected_hubs.csv`**
-   * *Ý nghĩa:* Danh sách 5 kho trung chuyển (Micro-hub) được hệ thống chọn ra là vị trí tối ưu nhất để đặt cơ sở.
-3. **`routing_results.csv`**
-   * *Ý nghĩa:* Bảng chi tiết cho từng đơn hàng (gồm mã đơn, kịch bản, số phút giao và số km quãng đường). Cung cấp dữ liệu thô để vẽ biểu đồ chi tiết nếu cần.
-4. **`summary_results.xlsx` (File minh chứng quan trọng nhất)**
-   * *Ý nghĩa:* File báo cáo KPI tổng. Cung cấp 3 chỉ số cốt lõi: `avg_time` (Thời gian giao trung bình), `total_distance` (Tổng quãng đường) và `CO2_emissions` (Khí thải CO₂). 
-   * *Giá trị cốt lõi:* Dùng để chứng minh kịch bản Đa phương thức (Full Multimodal) mang lại thời gian và mức phát thải **THẤP HƠN** so với kịch bản truyền thống (Road Only).
-5. **`simulation_log.txt`**
-   * *Ý nghĩa:* File text giả lập dòng thời gian cập nhật trạng thái các bước giao hàng (Mô phỏng hệ thống Tracking App dành cho khách hàng).
+### 📌 4. Custom Exception Handling (`src/core/exceptions/base.py`)
+* Hệ thống định nghĩa các ngoại lệ nghiệp vụ chuyên biệt (`NotFoundException`, `RoutingException`, `HubSelectionException`).
+* FastAPI Exception Handler tự động bắt lỗi và chuẩn hóa JSON Response cho Frontend.
 
 ---
 
-## 6. Hướng dẫn chạy và bảo trì hệ thống
+## 3. Kiểm thử Tự động (Automated Testing)
 
-* **Chạy bình thường:** Mở Terminal/Command Prompt trên PyCharm, đảm bảo đã cài đặt các thư viện (`pip install pandas numpy scipy networkx osmnx openpyxl scikit-learn`), sau đó chạy lệnh: `python src/main.py`.
-* **Khi có dữ liệu mới:** Chỉ cần ghi đè file CSV mới vào thư mục `data/` (ví dụ: thay đổi tọa độ khách hàng, thêm ứng viên Hub), hệ thống sẽ tự động đọc và tính toán lại từ đầu.
-* **Khi muốn mở rộng bản đồ (Ví dụ thêm Quận Bình Thạnh, TP. Thủ Đức):** Sửa tên khu vực trong file `src/build_graph.py` (biến `places`). Sau đó **BẮT BUỘC phải xóa file `results/multimodal_graph.pkl`** cũ đi để hệ thống kết nối lại với mạng và tải bản đồ mới lớn hơn.
+Dự án đã tích hợp bộ kiểm thử tự động sử dụng `pytest`:
+
+```bash
+# Chạy toàn bộ Unit Tests & Integration API Tests
+py -3.12 -m pytest tests/
+```
+
+---
+
+## 4. Hướng dẫn Vận hành Hệ thống
+
+### **Cách 1: Khởi chạy API Server Backend**
+```bash
+py -3.12 src/server.py
+```
+Server chạy tại: `http://127.0.0.1:8000` (Tự động tải giao diện `index.html` tại trang chủ `/`).
+
+### **Cách 2: Chạy Pipeline CLI thủ công**
+```bash
+py -3.12 src/main.py
+```

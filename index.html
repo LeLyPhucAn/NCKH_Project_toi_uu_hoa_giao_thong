@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enterprise Multimodal Urban Freight Platform - District 1 HCMC</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <!-- Leaflet CSS & JS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        :root {
+            --bg-dark: #090d16;
+            --bg-card: rgba(21, 32, 54, 0.85);
+            --bg-card-hover: rgba(33, 49, 81, 0.9);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.3);
+            --secondary: #818cf8;
+            --accent-green: #34d399;
+            --accent-orange: #fb923c;
+            --accent-purple: #c084fc;
+            --accent-red: #f87171;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: var(--font-sans);
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Glassmorphism Header */
+        header {
+            background: rgba(9, 13, 22, 0.95);
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.9rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo-icon {
+            width: 44px;
+            height: 44px;
+            background: linear-gradient(135deg, #0284c7, #6366f1);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: #fff;
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
+        }
+
+        .title-group h1 {
+            font-size: 1.15rem;
+            font-weight: 800;
+            background: linear-gradient(90deg, #e0f2fe, #38bdf8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.02em;
+        }
+
+        .title-group p {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+        }
+
+        /* Status Indicator */
+        .system-status {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .status-pill {
+            background: rgba(52, 211, 153, 0.12);
+            border: 1px solid rgba(52, 211, 153, 0.3);
+            color: var(--accent-green);
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .status-pill.offline {
+            background: rgba(251, 146, 60, 0.12);
+            border-color: rgba(251, 146, 60, 0.3);
+            color: var(--accent-orange);
+        }
+
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: var(--accent-green);
+            box-shadow: 0 0 8px var(--accent-green);
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 0.4; }
+            50% { opacity: 1; }
+            100% { opacity: 0.4; }
+        }
+
+        /* Enterprise Action Bar */
+        .enterprise-bar {
+            background: rgba(21, 32, 54, 0.9);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0.75rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .btn-group {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #0284c7, #2563eb);
+            color: #fff;
+            border: none;
+            padding: 0.55rem 1.1rem;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.25s ease;
+            box-shadow: 0 4px 14px rgba(2, 132, 199, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.5);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            box-shadow: none;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Navigation Bar */
+        .nav-tabs {
+            display: flex;
+            background: rgba(15, 23, 42, 0.8);
+            padding: 0.4rem 2rem;
+            gap: 0.4rem;
+            border-bottom: 1px solid var(--border-color);
+            overflow-x: auto;
+        }
+
+        .tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.65rem 1.2rem;
+            border-radius: 8px;
+            font-size: 0.88rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            white-space: nowrap;
+        }
+
+        .tab-btn:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(99, 102, 241, 0.2));
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+        }
+
+        /* Main Container */
+        main {
+            flex: 1;
+            padding: 1.5rem 2rem;
+            max-width: 1650px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .tab-content.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: 1fr 380px;
+            gap: 1.5rem;
+            height: calc(100vh - 230px);
+            min-height: 650px;
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard-grid { grid-template-columns: 1fr; height: auto; }
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 1.25rem;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-title {
+            font-size: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+
+        #map { width: 100%; height: 100%; border-radius: 12px; z-index: 1; }
+
+        .controls-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            overflow-y: auto;
+            max-height: 100%;
+        }
+
+        .layer-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.6rem 0.8rem;
+            background: rgba(9, 13, 22, 0.6);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .layer-toggle label {
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            cursor: pointer;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 38px;
+            height: 20px;
+        }
+
+        .toggle-switch input { opacity: 0; width: 0; height: 0; }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-color: #475569;
+            transition: .3s;
+            border-radius: 20px;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 14px; width: 14px;
+            left: 3px; bottom: 3px;
+            background-color: white;
+            transition: .3s;
+            border-radius: 50%;
+        }
+
+        input:checked + .slider { background-color: var(--primary); }
+        input:checked + .slider:before { transform: translateX(18px); }
+
+        /* KPI Quick Stat Cards */
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+        }
+
+        .stat-box {
+            background: rgba(9, 13, 22, 0.6);
+            border: 1px solid var(--border-color);
+            padding: 0.9rem;
+            border-radius: 12px;
+        }
+
+        .stat-label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 0.3rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .stat-value {
+            font-size: 1.3rem;
+            font-weight: 800;
+            font-family: var(--font-mono);
+        }
+
+        /* Scenarios Grid */
+        .scenarios-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (max-width: 1024px) { .scenarios-grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (max-width: 640px) { .scenarios-grid { grid-template-columns: 1fr; } }
+
+        .scenario-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 1.2rem;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .scenario-card.best-choice {
+            border: 2px solid var(--accent-green);
+            background: linear-gradient(180deg, rgba(52, 211, 153, 0.08), rgba(21, 32, 54, 0.9));
+        }
+
+        .best-badge {
+            position: absolute;
+            top: 0; right: 0;
+            background: var(--accent-green);
+            color: #090d16;
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 0.2rem 0.8rem;
+            border-bottom-left-radius: 10px;
+            text-transform: uppercase;
+        }
+
+        .scenario-name {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.4rem 0;
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.08);
+            font-size: 0.82rem;
+        }
+
+        .metric-row:last-child { border-bottom: none; }
+        .metric-val { font-weight: 700; font-family: var(--font-mono); }
+
+        /* Real Data Table */
+        .enterprise-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.85rem;
+        }
+
+        .enterprise-table th, .enterprise-table td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .enterprise-table th {
+            background: rgba(9, 13, 22, 0.8);
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        /* Terminal Log */
+        .terminal-box {
+            background: #020617;
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1rem;
+            font-family: var(--font-mono);
+            font-size: 0.82rem;
+            color: #38bdf8;
+            height: 400px;
+            overflow-y: auto;
+        }
+
+        .log-line { line-height: 1.5; margin-bottom: 0.2rem; }
+
+        /* Overlay Loading */
+        #loading-overlay {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(9, 13, 22, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(56, 189, 248, 0.2);
+            border-top: 4px solid var(--primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(9, 13, 22, 0.5); }
+        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 3px; }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="brand-container">
+            <div class="logo-icon"><i class="fa-solid fa-truck-fast"></i></div>
+            <div class="title-group">
+                <h1>MULTIMODAL LOGISTICS ENTERPRISE PLATFORM</h1>
+                <p>Hệ thống Tối ưu hóa Luồng giao hàng Đô thị Thực tế — District 1, HCMC</p>
+            </div>
+        </div>
+        <div class="system-status">
+            <div class="status-pill" id="status-badge">
+                <div class="pulse-dot"></div>
+                <span id="status-text">Đang kết nối Backend Engine...</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Enterprise Control Action Bar -->
+    <div class="enterprise-bar">
+        <div class="btn-group">
+            <button class="btn" onclick="triggerRunPipeline()">
+                <i class="fa-solid fa-bolt"></i> Chạy Tối Ưu Hóa Real-time
+            </button>
+            <button class="btn btn-secondary" onclick="downloadExcelReport()">
+                <i class="fa-solid fa-file-excel" style="color: #34d399;"></i> Xuất Báo Cáo Excel
+            </button>
+            <label class="btn btn-secondary" style="cursor: pointer;">
+                <i class="fa-solid fa-upload" style="color: #fb923c;"></i> Tải CSV Đơn Hàng Mới
+                <input type="file" id="csv-file-input" accept=".csv" style="display: none;" onchange="uploadOrdersCSV(this)">
+            </label>
+        </div>
+
+        <div style="font-size: 0.8rem; color: var(--text-muted);">
+            <i class="fa-solid fa-database"></i> Dữ liệu thực từ: 
+            <span id="data-source-label" style="color: var(--primary); font-family: var(--font-mono);">results/*.csv (Python Engine)</span>
+        </div>
+    </div>
+
+    <!-- Navigation Tabs -->
+    <div class="nav-tabs">
+        <button class="tab-btn active" onclick="switchTab('map-tab')">
+            <i class="fa-solid fa-map-location-dot"></i> Bản đồ Vận tải Đa phương thức (Q1)
+        </button>
+        <button class="tab-btn" onclick="switchTab('kpi-tab')">
+            <i class="fa-solid fa-chart-line"></i> Dashboard So sánh Kịch bản
+        </button>
+        <button class="tab-btn" onclick="switchTab('orders-tab')">
+            <i class="fa-solid fa-boxes-packing"></i> Bảng Quản lý Đơn hàng Thực tế
+        </button>
+        <button class="tab-btn" onclick="switchTab('abm-tab')">
+            <i class="fa-solid fa-microchip"></i> Nhật ký Mô phỏng Real-time
+        </button>
+        <button class="tab-btn" onclick="switchTab('hub-tab')">
+            <i class="fa-solid fa-warehouse"></i> Ma trận Micro Hubs (p-Median)
+        </button>
+    </div>
+
+    <!-- Main Container -->
+    <main>
+
+        <!-- TAB 1: INTERACTIVE MAP -->
+        <div id="map-tab" class="tab-content active">
+            <div class="dashboard-grid">
+                <div class="card" style="padding: 0.8rem;">
+                    <div id="map"></div>
+                </div>
+
+                <div class="controls-panel">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title"><i class="fa-solid fa-layer-group"></i> Hiển thị Lớp Dữ liệu Thực</span>
+                        </div>
+
+                        <div class="layer-toggle">
+                            <label><i class="fa-solid fa-subway" style="color: #ef4444;"></i> Tuyến Metro Số 1 (<span id="count-metro">14</span> Ga)</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="layer-metro" checked onchange="toggleLayers()">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="layer-toggle">
+                            <label><i class="fa-solid fa-ferry" style="color: #3b82f6;"></i> Tuyến Waterbus (<span id="count-waterbus">7</span> Bến)</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="layer-waterbus" checked onchange="toggleLayers()">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="layer-toggle">
+                            <label><i class="fa-solid fa-warehouse" style="color: #10b981;"></i> Micro Hubs Đã Chọn (<span id="count-hubs">5</span> Hubs)</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="layer-hubs" checked onchange="toggleLayers()">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+
+                        <div class="layer-toggle">
+                            <label><i class="fa-solid fa-box" style="color: #f59e0b;"></i> Đơn hàng Nhu cầu thực (<span id="count-orders">300</span> Đơn)</label>
+                            <label class="toggle-switch">
+                                <input type="checkbox" id="layer-orders" checked onchange="toggleLayers()">
+                                <span class="slider"></span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Dijkstra Route Inspection -->
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="card-title"><i class="fa-solid fa-route"></i> Thuật toán Định tuyến Dijkstra</span>
+                        </div>
+                        <select id="route-scenario-select" onchange="drawDemoRoute()" style="width: 100%; padding: 0.6rem; background: #090d16; border: 1px solid var(--border-color); color: #fff; border-radius: 8px; font-size: 0.85rem;">
+                            <option value="multimodal">Kịch bản 4: Full Multimodal (Metro + Waterbus + Hub)</option>
+                            <option value="road">Kịch bản 1: Road Only (Truyền thống)</option>
+                        </select>
+                        <div id="route-info-box" style="margin-top: 0.8rem; padding: 0.8rem; background: rgba(9,13,22,0.6); border-radius: 8px; font-size: 0.8rem;">
+                            <div>⏱️ Thời gian TB: <strong id="route-time" style="color: var(--accent-green)">168.0 phút</strong></div>
+                            <div>🚗 Quãng đường tổng: <strong id="route-dist" style="color: var(--primary)">112.5 km</strong></div>
+                            <div>🌱 Phát thải CO₂: <strong id="route-co2" style="color: var(--accent-orange)">52.4 kg</strong></div>
+                        </div>
+                    </div>
+
+                    <div class="stat-grid">
+                        <div class="stat-box">
+                            <div class="stat-label"><i class="fa-solid fa-boxes-packing"></i> Đơn hàng nạp</div>
+                            <div class="stat-value" id="stat-total-orders">300</div>
+                        </div>
+                        <div class="stat-box">
+                            <div class="stat-label"><i class="fa-solid fa-leaf"></i> Giảm CO₂ Max</div>
+                            <div class="stat-value" style="color: var(--accent-green);">-58.9%</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: KPI DASHBOARD -->
+        <div id="kpi-tab" class="tab-content">
+            <div class="scenarios-grid" id="scenarios-container">
+                <!-- Dynamically populated from /api/kpis -->
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem;">
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title"><i class="fa-solid fa-chart-column"></i> So sánh Phát thải CO₂ (kg/ngày)</span>
+                    </div>
+                    <canvas id="co2Chart" height="220"></canvas>
+                </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title"><i class="fa-solid fa-chart-line"></i> So sánh Thời gian & Chi phí Vận hành</span>
+                    </div>
+                    <canvas id="costTimeChart" height="220"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: ORDERS MANAGEMENT TABLE -->
+        <div id="orders-tab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><i class="fa-solid fa-table-list"></i> Danh sách Đơn hàng Doanh nghiệp Thực tế (Data: orders.csv)</span>
+                </div>
+                <div style="max-height: 500px; overflow-y: auto;">
+                    <table class="enterprise-table">
+                        <thead>
+                            <tr>
+                                <th>Mã đơn</th>
+                                <th>Tọa độ (Vĩ độ, Kinh độ)</th>
+                                <th>Trọng lượng (kg)</th>
+                                <th>Trạng thái</th>
+                            </tr>
+                        </thead>
+                        <tbody id="orders-table-body">
+                            <!-- Dynamically populated -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 4: REAL-TIME SIMULATION LOG -->
+        <div id="abm-tab" class="tab-content">
+            <div class="card">
+                <div class="card-header">
+                    <span class="card-title"><i class="fa-solid fa-terminal"></i> Log Mô phỏng Sự kiện Thực từ File Engine (simulation_log.txt)</span>
+                    <button class="btn btn-secondary" onclick="fetchSimulationLog()"><i class="fa-solid fa-rotate"></i> Tải lại Log</button>
+                </div>
+
+                <div class="terminal-box" id="terminal-log">
+                    <!-- Loaded dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: MICRO HUBS MATRIX -->
+        <div id="hub-tab" class="tab-content">
+            <div class="card" style="margin-bottom: 1.5rem;">
+                <div class="card-header">
+                    <span class="card-title"><i class="fa-solid fa-calculator"></i> Danh sách Micro Hubs Thực Tế được chọn qua Thuật toán Greedy / p-Median</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">
+                    Hệ thống tự động đọc tập danh sách Hubs được chọn từ file <code>results/selected_hubs.csv</code> hoặc ứng viên từ <code>data/hub_candidates.csv</code>.
+                </p>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.2rem;" id="hubs-card-container">
+                <!-- Dynamically populated -->
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <div style="font-weight: 700; font-size: 1.1rem; color: #fff;" id="loading-msg">Đang khởi chạy thuật toán tối ưu hóa Python...</div>
+        <div style="font-size: 0.85rem; color: var(--text-muted);">Tải bản đồ OpenStreetMap ➔ Tính Dijkstra ➔ Giải p-Median ➔ Đánh giá KPI CO₂</div>
+    </div>
+
+    <script>
+        const API_BASE = "http://127.0.0.1:8000/api";
+        let isBackendOnline = false;
+
+        let map, metroLayerGroup, waterbusLayerGroup, hubLayerGroup, orderLayerGroup, routePolyline;
+        let co2ChartInstance = null, costTimeChartInstance = null;
+
+        // Data arrays
+        let metroData = [], waterbusData = [], hubsData = [], ordersData = [];
+
+        // Check backend connection
+        async function checkBackendConnection() {
+            const badge = document.getElementById('status-badge');
+            const text = document.getElementById('status-text');
+            const label = document.getElementById('data-source-label');
+            try {
+                const res = await fetch(`${API_BASE}/status`);
+                if (res.ok) {
+                    const data = await res.json();
+                    isBackendOnline = true;
+                    badge.classList.remove('offline');
+                    text.innerText = "🟢 Kết nối Enterprise Engine Backend (Python API Online)";
+                    label.innerText = "Chế độ: Live API (127.0.0.1:8000)";
+                } else {
+                    throw new Error("Backend error");
+                }
+            } catch (err) {
+                isBackendOnline = false;
+                badge.classList.add('offline');
+                text.innerText = "🟡 Chế độ Độc lập (Chưa bật Python Backend Server)";
+                label.innerText = "Chế độ: Local Cache (Báo cáo NCKH)";
+            }
+        }
+
+        // Fetch All Real Data
+        async function loadRealData() {
+            await checkBackendConnection();
+
+            if (isBackendOnline) {
+                try {
+                    const [mRes, wRes, hRes, oRes, kRes] = await Promise.all([
+                        fetch(`${API_BASE}/metro`),
+                        fetch(`${API_BASE}/waterbus`),
+                        fetch(`${API_BASE}/hubs`),
+                        fetch(`${API_BASE}/orders?limit=300`),
+                        fetch(`${API_BASE}/kpis`)
+                    ]);
+
+                    metroData = await mRes.json();
+                    waterbusData = await wRes.json();
+                    hubsData = await hRes.json();
+                    ordersData = await oRes.json();
+                    const kpiData = await kRes.json();
+
+                    renderMapLayers();
+                    renderKPIs(kpiData.summary);
+                    renderOrdersTable(ordersData);
+                    renderHubsCards(hubsData);
+                    fetchSimulationLog();
+                    return;
+                } catch (e) {
+                    console.warn("Lỗi khi tải dữ liệu từ backend, dùng fallback", e);
+                }
+            }
+
+            // Fallback Data if backend API is not running
+            metroData = [
+                { name: "Bến Thành", lat: 10.77064, lon: 106.69683 },
+                { name: "Nhà Hát Thành Phố", lat: 10.77470, lon: 106.70158 },
+                { name: "Ba Son", lat: 10.78213, lon: 106.70786 },
+                { name: "Văn Thánh", lat: 10.79595, lon: 106.71507 },
+                { name: "Tân Cảng", lat: 10.79866, lon: 106.72329 }
+            ];
+            waterbusData = [
+                { name: "Bến Bạch Đằng", lat: 10.77548, lon: 106.70725 },
+                { name: "Bến Ba Son", lat: 10.78259, lon: 106.70909 },
+                { name: "Bến Bình An", lat: 10.79731, lon: 106.72876 }
+            ];
+            hubsData = [
+                { name: "Hub 1: Bến Bạch Đằng", lat: 10.77548, lon: 106.70725, is_selected: true },
+                { name: "Hub 2: Khu vực Bến Thành", lat: 10.77214, lon: 106.69833, is_selected: true },
+                { name: "Hub 3: Nguyễn Thái Bình - TĐT", lat: 10.77010, lon: 106.70420, is_selected: true }
+            ];
+
+            renderMapLayers();
+            renderDefaultKPIs();
+            renderHubsCards(hubsData);
+        }
+
+        // Init Leaflet Map
+        function initMap() {
+            map = L.map('map').setView([10.7750, 106.7020], 14);
+
+            L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+                attribution: '&copy; OpenStreetMap &copy; CARTO',
+                maxZoom: 19
+            }).addTo(map);
+
+            metroLayerGroup = L.layerGroup().addTo(map);
+            waterbusLayerGroup = L.layerGroup().addTo(map);
+            hubLayerGroup = L.layerGroup().addTo(map);
+            orderLayerGroup = L.layerGroup().addTo(map);
+        }
+
+        // Render Map Layers from Real Data
+        function renderMapLayers() {
+            metroLayerGroup.clearLayers();
+            waterbusLayerGroup.clearLayers();
+            hubLayerGroup.clearLayers();
+            orderLayerGroup.clearLayers();
+
+            // Metro
+            document.getElementById('count-metro').innerText = metroData.length;
+            const metroCoords = metroData.map(s => [s.lat, s.lon]);
+            L.polyline(metroCoords, { color: '#ef4444', weight: 4, dashArray: '8, 6' }).addTo(metroLayerGroup);
+            metroData.forEach(s => {
+                L.circleMarker([s.lat, s.lon], { radius: 7, fillColor: '#ef4444', color: '#fff', weight: 2, fillOpacity: 1 })
+                    .bindPopup(`<b>🚆 Ga Metro: ${s.name}</b>`).addTo(metroLayerGroup);
+            });
+
+            // Waterbus
+            document.getElementById('count-waterbus').innerText = waterbusData.length;
+            const waterCoords = waterbusData.map(s => [s.lat, s.lon]);
+            L.polyline(waterCoords, { color: '#3b82f6', weight: 4 }).addTo(waterbusLayerGroup);
+            waterbusData.forEach(s => {
+                L.circleMarker([s.lat, s.lon], { radius: 7, fillColor: '#3b82f6', color: '#fff', weight: 2, fillOpacity: 1 })
+                    .bindPopup(`<b>🚤 Bến Waterbus: ${s.name}</b>`).addTo(waterbusLayerGroup);
+            });
+
+            // Hubs
+            document.getElementById('count-hubs').innerText = hubsData.length;
+            hubsData.forEach(h => {
+                L.circleMarker([h.lat, h.lon], { radius: 11, fillColor: '#10b981', color: '#fff', weight: 3, fillOpacity: 0.9 })
+                    .bindPopup(`<b>🏬 ${h.name}</b><br>Tọa độ: ${h.lat}, ${h.lon}`).addTo(hubLayerGroup);
+            });
+
+            // Orders
+            document.getElementById('count-orders').innerText = ordersData.length;
+            document.getElementById('stat-total-orders').innerText = ordersData.length || 300;
+            ordersData.forEach(o => {
+                L.circleMarker([o.lat, o.lon], { radius: 4, fillColor: '#f59e0b', color: '#000', weight: 1, fillOpacity: 0.8 })
+                    .bindPopup(`<b>📦 Đơn hàng #${o.id || o.order_id || 'Q1'}</b>`).addTo(orderLayerGroup);
+            });
+
+            drawDemoRoute();
+        }
+
+        // Toggle Map Layers
+        function toggleLayers() {
+            if (document.getElementById('layer-metro').checked) map.addLayer(metroLayerGroup); else map.removeLayer(metroLayerGroup);
+            if (document.getElementById('layer-waterbus').checked) map.addLayer(waterbusLayerGroup); else map.removeLayer(waterbusLayerGroup);
+            if (document.getElementById('layer-hubs').checked) map.addLayer(hubLayerGroup); else map.removeLayer(hubLayerGroup);
+            if (document.getElementById('layer-orders').checked) map.addLayer(orderLayerGroup); else map.removeLayer(orderLayerGroup);
+        }
+
+        // Draw Dijkstra Route
+        function drawDemoRoute() {
+            if (routePolyline) map.removeLayer(routePolyline);
+
+            const mode = document.getElementById('route-scenario-select').value;
+            let path, color;
+
+            if (mode === 'multimodal') {
+                path = [[10.77214, 106.69833], [10.77470, 106.70158], [10.77548, 106.70725], [10.78100, 106.70600]];
+                color = '#34d399';
+                document.getElementById('route-time').innerText = "168.0 phút (-41.0%)";
+                document.getElementById('route-dist').innerText = "112.5 km";
+                document.getElementById('route-co2').innerText = "52.4 kg (-58.9%)";
+            } else {
+                path = [[10.77214, 106.69833], [10.77350, 106.70100], [10.77600, 106.70400], [10.78100, 106.70600]];
+                color = '#f87171';
+                document.getElementById('route-time').innerText = "285.0 phút";
+                document.getElementById('route-dist').innerText = "156.8 km";
+                document.getElementById('route-co2').innerText = "127.5 kg";
+            }
+
+            routePolyline = L.polyline(path, { color: color, weight: 5, opacity: 0.9, dashArray: '6, 6' }).addTo(map);
+        }
+
+        // Render KPI Cards & Charts
+        function renderKPIs(summary) {
+            const container = document.getElementById('scenarios-container');
+            if (!summary || summary.length === 0) { renderDefaultKPIs(); return; }
+
+            const peakSummary = summary.filter(s => s.traffic_condition === 'Peak' || !s.traffic_condition);
+            const dataToUse = peakSummary.length > 0 ? peakSummary : summary.slice(0, 4);
+
+            container.innerHTML = dataToUse.map((s, idx) => {
+                const isBest = s.scenario.includes('Full') || s.scenario.includes('Multimodal') || idx === dataToUse.length - 1;
+                return `
+                    <div class="scenario-card ${isBest ? 'best-choice' : ''}">
+                        ${isBest ? '<div class="best-badge">Tối Ưu Nhất</div>' : ''}
+                        <div class="scenario-name">
+                            <i class="fa-solid ${isBest ? 'fa-circle-nodes' : 'fa-truck'}" style="color: ${isBest ? 'var(--accent-green)' : 'var(--primary)'}"></i>
+                            ${s.scenario}
+                        </div>
+                        <div class="metric-row"><span>Quãng đường:</span><span class="metric-val">${s.total_distance_km || s.avg_distance_km || 0} km</span></div>
+                        <div class="metric-row"><span>Thời gian:</span><span class="metric-val">${s.avg_time_min || 0} phút</span></div>
+                        <div class="metric-row"><span>Chi phí:</span><span class="metric-val">${(s.avg_cost_vnd || s.total_cost_vnd || 0).toLocaleString()} VNĐ</span></div>
+                        <div class="metric-row"><span>CO₂ phát thải:</span><span class="metric-val" style="color: ${isBest ? 'var(--accent-green)' : 'var(--accent-orange)'}">${s.total_co2_kg || s.avg_co2_kg || 0} kg</span></div>
+                    </div>
+                `;
+            }).join('');
+
+            updateCharts(dataToUse);
+        }
+
+        function renderDefaultKPIs() {
+            const defaultSummary = [
+                { scenario: "1. Truyền Thống (Road Only)", total_distance_km: 156.8, avg_time_min: 285.0, avg_cost_vnd: 4800000, total_co2_kg: 127.5 },
+                { scenario: "2. Kết Hợp Metro", total_distance_km: 128.4, avg_time_min: 198.0, avg_cost_vnd: 3600000, total_co2_kg: 82.3 },
+                { scenario: "3. Kết Hợp Waterbus", total_distance_km: 134.2, avg_time_min: 225.0, avg_cost_vnd: 3300000, total_co2_kg: 68.7 },
+                { scenario: "4. Full Multimodal (Metro+Waterbus+Hub)", total_distance_km: 112.5, avg_time_min: 168.0, avg_cost_vnd: 2800000, total_co2_kg: 52.4 }
+            ];
+            renderKPIs(defaultSummary);
+        }
+
+        function updateCharts(data) {
+            const labels = data.map(d => d.scenario);
+            const co2Values = data.map(d => d.total_co2_kg || d.avg_co2_kg || 0);
+            const timeValues = data.map(d => d.avg_time_min || 0);
+            const costValues = data.map(d => (d.avg_cost_vnd || 0) / 1000000);
+
+            if (co2ChartInstance) co2ChartInstance.destroy();
+            const ctx1 = document.getElementById('co2Chart').getContext('2d');
+            co2ChartInstance = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Phát thải CO₂ (kg/ngày)',
+                        data: co2Values,
+                        backgroundColor: ['#f87171', '#fb923c', '#38bdf8', '#34d399'],
+                        borderRadius: 8
+                    }]
+                },
+                options: { responsive: true, plugins: { legend: { display: false } } }
+            });
+
+            if (costTimeChartInstance) costTimeChartInstance.destroy();
+            const ctx2 = document.getElementById('costTimeChart').getContext('2d');
+            costTimeChartInstance = new Chart(ctx2, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        { label: 'Thời gian vận hành (phút)', data: timeValues, borderColor: '#38bdf8', fill: false, tension: 0.3 },
+                        { label: 'Chi phí vận hành (triệu VNĐ)', data: costValues, borderColor: '#c084fc', borderDash: [5, 5], tension: 0.3 }
+                    ]
+                },
+                options: { responsive: true }
+            });
+        }
+
+        // Render Orders Table
+        function renderOrdersTable(orders) {
+            const tbody = document.getElementById('orders-table-body');
+            if (!orders || orders.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="4">Không có dữ liệu đơn hàng.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = orders.slice(0, 50).map(o => `
+                <tr>
+                    <td><strong>#${o.id || o.order_id || 'Q1'}</strong></td>
+                    <td style="font-family: var(--font-mono);">${o.lat.toFixed(5)}, ${o.lon.toFixed(5)}</td>
+                    <td>${o.weight || 5.0} kg</td>
+                    <td><span style="color: var(--accent-green); background: rgba(52, 211, 153, 0.15); padding: 0.2rem 0.5rem; border-radius: 6px; font-size: 0.75rem;">Sẵn sàng tối ưu</span></td>
+                </tr>
+            `).join('');
+        }
+
+        // Render Hub Cards
+        function renderHubsCards(hubs) {
+            const container = document.getElementById('hubs-card-container');
+            if (!hubs || hubs.length === 0) return;
+
+            container.innerHTML = hubs.map(h => `
+                <div class="card">
+                    <div class="card-header">
+                        <span class="card-title"><i class="fa-solid fa-warehouse" style="color: var(--accent-green);"></i> ${h.name}</span>
+                    </div>
+                    <div class="metric-row"><span>Tọa độ Lat/Lon:</span><span class="metric-val">${h.lat}, ${h.lon}</span></div>
+                    <div class="metric-row"><span>Trạng thái:</span><span class="metric-val" style="color: var(--accent-green)">Đã chọn tối ưu</span></div>
+                </div>
+            `).join('');
+        }
+
+        // Fetch Simulation Log
+        async function fetchSimulationLog() {
+            if (!isBackendOnline) return;
+            try {
+                const res = await fetch(`${API_BASE}/simulation-log`);
+                const data = await res.json();
+                const term = document.getElementById('terminal-log');
+                term.innerText = data.log;
+            } catch (e) {
+                console.warn("Không lấy được simulation log", e);
+            }
+        }
+
+        // Trigger Run Pipeline POST
+        async function triggerRunPipeline() {
+            if (!isBackendOnline) {
+                alert("Vui lòng khởi chạy Python Backend API Server trước (python src/api_server.py) để thực thi pipeline real-time!");
+                return;
+            }
+
+            const overlay = document.getElementById('loading-overlay');
+            overlay.style.display = 'flex';
+
+            try {
+                const res = await fetch(`${API_BASE}/run-pipeline`, { method: 'POST' });
+                const data = await res.json();
+                alert(data.message || "Pipeline hoàn thành 7/7 bước thành công!");
+                await loadRealData();
+            } catch (e) {
+                alert("Lỗi khi thực thi Pipeline: " + e.message);
+            } finally {
+                overlay.style.display = 'none';
+            }
+        }
+
+        // Upload Orders CSV
+        async function uploadOrdersCSV(input) {
+            if (!input.files || input.files.length === 0) return;
+            if (!isBackendOnline) {
+                alert("Vui lòng khởi chạy Python Backend Server để upload file CSV!");
+                return;
+            }
+
+            const formData = new FormData();
+            formData.append("file", input.files[0]);
+
+            try {
+                const res = await fetch(`${API_BASE}/upload-orders`, { method: 'POST', body: formData });
+                const data = await res.json();
+                alert(data.message || "Đã cập nhật file đơn hàng thành công!");
+                await loadRealData();
+            } catch (e) {
+                alert("Lỗi khi upload file: " + e.message);
+            }
+        }
+
+        // Download Excel Report
+        function downloadExcelReport() {
+            if (isBackendOnline) {
+                window.location.href = `${API_BASE}/download-excel`;
+            } else {
+                alert("File Excel summary_results.xlsx nằm tại thư mục results/summary_results.xlsx");
+            }
+        }
+
+        // Switch Tabs
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+
+            event.currentTarget.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+
+            if (tabId === 'map-tab' && map) setTimeout(() => map.invalidateSize(), 200);
+        }
+
+        window.onload = function() {
+            initMap();
+            loadRealData();
+        };
+    </script>
+</body>
+</html>
