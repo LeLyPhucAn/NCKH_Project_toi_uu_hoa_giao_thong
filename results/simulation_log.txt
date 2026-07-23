@@ -1,42 +1,80 @@
 ==========================================================================================
-                     MULTIMODAL TRANSPORTATION SIMULATION SYSTEM LOG                      
-         Analysis of Order_101 Delivery under Peak Hour Congestion (17:00 - 18:00)        
+           MULTIMODAL TRANSPORTATION SIMULATION SYSTEM LOG
+     Hệ thống Logistics Đa phương thức TP.HCM — Phân tích thực tế
+     Generated: 2026-07-09 00:00:39
 ==========================================================================================
 
-[SCENARIO 1: ROAD ONLY (Traditional Motorcycle Delivery)]
+[SECTION 1: KPI TỔNG HỢP THỰC TẾ TỪ THUẬT TOÁN]
 ------------------------------------------------------------------------------------------
-17:00:00 [HUB_BEN_THANH] Order_101 (Weight: 5.0 kg) assigned to Shipper_027 (Motorcycle).
-17:02:15 [ROAD] Shipper_027 departs Hub Ben Thanh via Le Loi street.
-17:08:30 [TRAFFIC_CONGESTION] Shipper_027 is stuck near Pasteur junction. Road speed dropped to 10 km/h.
-17:25:40 [TRAFFIC_CONGESTION] Slow moving traffic on Ton Duc Thang street. High fuel consumption and emissions.
-17:42:10 [ROAD] Crossing Nguyen Huu Canh bridge, heavy traffic bottleneck.
-17:54:15 [DESTINATION] Shipper_027 arrives at customer location. Order delivered successfully.
+  [Off-Peak] [Central Full Multimodal] Avg Time:  11.72 min | Avg Dist:  6.11 km | Avg CO2: 0.425 kg | Avg Cost:    13873 VND | Orders: 300
+  [Off-Peak] [Central Road + Metro] Avg Time:  11.72 min | Avg Dist:  6.11 km | Avg CO2: 0.425 kg | Avg Cost:    13873 VND | Orders: 300
+  [Off-Peak] [Central Road + Waterbus] Avg Time:  12.65 min | Avg Dist:  6.33 km | Avg CO2: 0.759 kg | Avg Cost:    18978 VND | Orders: 300
+  [Off-Peak] [Central Road Only   ] Avg Time:  12.65 min | Avg Dist:  6.33 km | Avg CO2: 0.759 kg | Avg Cost:    18978 VND | Orders: 300
+  [Off-Peak] [Full Multimodal     ] Avg Time:   3.93 min | Avg Dist:  1.96 km | Avg CO2: 0.236 kg | Avg Cost:     5892 VND | Orders: 299
+  [Off-Peak] [Road + Metro        ] Avg Time:   3.93 min | Avg Dist:  1.96 km | Avg CO2: 0.236 kg | Avg Cost:     5892 VND | Orders: 299
+  [Off-Peak] [Road + Waterbus     ] Avg Time:   3.93 min | Avg Dist:  1.96 km | Avg CO2: 0.236 kg | Avg Cost:     5892 VND | Orders: 299
+  [Off-Peak] [Road Only           ] Avg Time:   3.93 min | Avg Dist:  1.96 km | Avg CO2: 0.236 kg | Avg Cost:     5892 VND | Orders: 299
+  [Peak    ] [Central Full Multimodal] Avg Time:  18.16 min | Avg Dist:  6.62 km | Avg CO2: 0.312 kg | Avg Cost:    14134 VND | Orders: 300
+  [Peak    ] [Central Road + Metro] Avg Time:  18.16 min | Avg Dist:  6.62 km | Avg CO2: 0.312 kg | Avg Cost:    14134 VND | Orders: 300
+  [Peak    ] [Central Road + Waterbus] Avg Time:  29.17 min | Avg Dist:  6.50 km | Avg CO2: 0.604 kg | Avg Cost:    16857 VND | Orders: 300
+  [Peak    ] [Central Road Only   ] Avg Time:  31.63 min | Avg Dist:  6.33 km | Avg CO2: 0.759 kg | Avg Cost:    18978 VND | Orders: 300
+  [Peak    ] [Full Multimodal     ] Avg Time:   9.82 min | Avg Dist:  1.96 km | Avg CO2: 0.236 kg | Avg Cost:     5892 VND | Orders: 299
+  [Peak    ] [Road + Metro        ] Avg Time:   9.82 min | Avg Dist:  1.96 km | Avg CO2: 0.236 kg | Avg Cost:     5892 VND | Orders: 299
+  [Peak    ] [Road + Waterbus     ] Avg Time:   9.82 min | Avg Dist:  1.96 km | Avg CO2: 0.236 kg | Avg Cost:     5892 VND | Orders: 299
+  [Peak    ] [Road Only           ] Avg Time:   9.82 min | Avg Dist:  1.96 km | Avg CO2: 0.236 kg | Avg Cost:     5892 VND | Orders: 299
 
--> METRICS SUMMARY (ROAD ONLY):
-   - Total Delivery Time: 54.25 minutes
-   - Total Distance: 4.85 km
-   - Total Fuel/Wear Cost: 14,550 VND
-   - CO2 Emissions: 0.58 kg
-   - Status: Delivered (Delayed due to congestion)
+[SECTION 2: % CẢI THIỆN SO VỚI ROAD ONLY (BASELINE)]
 ------------------------------------------------------------------------------------------
+  [Off-Peak] [Full Multimodal     ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
+  [Off-Peak] [Road + Metro        ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
+  [Off-Peak] [Road + Waterbus     ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
+  [Peak    ] [Full Multimodal     ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
+  [Peak    ] [Road + Metro        ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
+  [Peak    ] [Road + Waterbus     ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
+  [Off-Peak] [Central Full Multimodal] Thời gian: +7.4% | CO2: +43.9% | Chi phí: +26.9%
+  [Off-Peak] [Central Road + Metro] Thời gian: +7.4% | CO2: +43.9% | Chi phí: +26.9%
+  [Off-Peak] [Central Road + Waterbus] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
+  [Off-Peak] [Central Road Only   ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
+  [Peak    ] [Central Full Multimodal] Thời gian: +42.6% | CO2: +58.9% | Chi phí: +25.5%
+  [Peak    ] [Central Road + Metro] Thời gian: +42.6% | CO2: +58.9% | Chi phí: +25.5%
+  [Peak    ] [Central Road + Waterbus] Thời gian: +7.8% | CO2: +20.4% | Chi phí: +11.2%
+  [Peak    ] [Central Road Only   ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
 
-[SCENARIO 4: ROAD + METRO (Multimodal Smart Delivery)]
+[SECTION 3: MÔ PHỎNG CHI TIẾT ĐƠN HÀNG ĐẠI DIỆN — PEAK HOUR]
 ------------------------------------------------------------------------------------------
-17:00:00 [HUB_BEN_THANH] Order_101 (Weight: 5.0 kg) assigned to Multimodal Route (Shipper + Metro).
-17:01:30 [ROAD] Shipper_082 departs Hub Ben Thanh to nearest Metro Station.
-17:03:45 [TRANSFER_POINT] Shipper_082 arrives at Metro Station Ben Thanh.
-17:03:45 [SYSTEM_TRANSFER] Motorcycle parked. Package scanned and checked into Metro Station. Transfer fee: 7,500 VND.
-17:08:45 [METRO_PLATFORM] Boarding Metro Line 1 Train (Departing towards Ba Son). Wait time: 5 mins.
-17:09:00 [METRO_LINE] Train departs. Speed: 40 km/h (Fully insulated from road traffic congestion).
-17:14:15 [TRANSFER_POINT] Train arrives at Metro Station Ba Son.
-17:14:15 [SYSTEM_TRANSFER] Package unloaded. Transferred to Last-Mile Shipper_099. Transfer fee: 7,500 VND.
-17:16:30 [ROAD] Shipper_099 departs Metro Station Ba Son via Road to customer (Last-Mile).
-17:22:45 [DESTINATION] Shipper_099 arrives at customer location. Order delivered successfully.
+  Đơn hàng: Order_116 | Hub xuất phát: 1 | Giờ: Peak (17:00)
 
--> METRICS SUMMARY (ROAD + METRO MULTIMODAL):
-   - Total Delivery Time: 22.75 minutes
-   - Total Distance: 4.98 km (0.45 km Road + 3.8 km Metro + 0.73 km Road)
-   - Total Cost: 18,540 VND (3,540 VND Fuel + 15,000 VND Metro Tickets)
-   - CO2 Emissions: 0.13 kg (0.054 kg Road + 0.076 kg Metro)
-   - Status: Delivered (On-Time, 58% time savings, 77% CO2 emissions reduction)
+  >> Kịch bản: Central Road Only
+     17:00:00  [DEPART]  Xuất phát từ 1
+     17:04:18  [ARRIVE]  Giao hàng thành công
+     Phương tiện sử dụng: road
+     Thời gian: 4.30 phút | Quãng đường: 0.86 km | CO2: 0.1032 kg | Chi phí: 2,580 VND
+
+  >> Kịch bản: Central Road + Metro
+     17:00:00  [DEPART]  Xuất phát từ 1
+     17:04:18  [ARRIVE]  Giao hàng thành công
+     Phương tiện sử dụng: road
+     Thời gian: 4.30 phút | Quãng đường: 0.86 km | CO2: 0.1032 kg | Chi phí: 2,580 VND
+
+  >> Kịch bản: Central Road + Waterbus
+     17:00:00  [DEPART]  Xuất phát từ 1
+     17:04:18  [ARRIVE]  Giao hàng thành công
+     Phương tiện sử dụng: road
+     Thời gian: 4.30 phút | Quãng đường: 0.86 km | CO2: 0.1032 kg | Chi phí: 2,580 VND
+
+  >> Kịch bản: Central Full Multimodal
+     17:00:00  [DEPART]  Xuất phát từ 1
+     17:04:18  [ARRIVE]  Giao hàng thành công
+     Phương tiện sử dụng: road
+     Thời gian: 4.30 phút | Quãng đường: 0.86 km | CO2: 0.1032 kg | Chi phí: 2,580 VND
+
+
+[SECTION 4: THỐNG KÊ PHÂN PHỐI KẾT QUẢ]
+------------------------------------------------------------------------------------------
+  Tổng đơn hoàn thành routing: 300
+  Road Only (Peak) — min: 0.1 | max: 31.6 | std: 6.52 phút
+  Multimodal (Peak) — min: 0.1 | max: 31.6 | std: 6.52 phút
+
+==========================================================================================
+                     END OF SIMULATION LOG
 ==========================================================================================

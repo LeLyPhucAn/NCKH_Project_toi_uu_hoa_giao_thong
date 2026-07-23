@@ -184,7 +184,7 @@ def add_metro_layer_with_edges(
             )
 
 
-def connect_multimodal_layers(G, metro_df, waterbus_df, max_transfer_dist_km=0.5):
+def connect_multimodal_layers(G, metro_df, waterbus_df, max_transfer_dist_km=1.5):
     print("  -> Connecting Metro and Waterbus stations to Road Network...")
     road_nodes = [
         n
@@ -208,12 +208,16 @@ def connect_multimodal_layers(G, metro_df, waterbus_df, max_transfer_dist_km=0.5
             )
 
             if dist_km <= max_transfer_dist_km:
+                # Tính transfer_time động: 1 phút overhead + thời gian đi bộ (5 km/h)
+                # Thực tế hơn: ga gần (50m) chỉ mất ~1.6 phút, ga xa (500m) mất ~7 phút
+                walk_time_min = (dist_km / 5.0) * 60  # vận tốc đi bộ 5 km/h
+                transfer_time_min = round(1.0 + walk_time_min, 2)  # 1 phút overhead cố định
                 # Vé metro 15,000đ -> gán 7,500đ cho mỗi chiều chuyển tiếp
                 G.add_edge(
                     nearest_road_node,
                     station_node_id,
                     length=dist_km * 1000,
-                    travel_time=5.0,
+                    travel_time=transfer_time_min,
                     mode="transfer",
                     transfer_type="metro",
                     cost=7500.0,
@@ -223,7 +227,7 @@ def connect_multimodal_layers(G, metro_df, waterbus_df, max_transfer_dist_km=0.5
                     station_node_id,
                     nearest_road_node,
                     length=dist_km * 1000,
-                    travel_time=5.0,
+                    travel_time=transfer_time_min,
                     mode="transfer",
                     transfer_type="metro",
                     cost=7500.0,
@@ -252,12 +256,15 @@ def connect_multimodal_layers(G, metro_df, waterbus_df, max_transfer_dist_km=0.5
             )
 
             if dist_km <= max_transfer_dist_km:
+                # Tính transfer_time động: 2 phút overhead (đợi tàu) + thời gian đi bộ (5 km/h)
+                walk_time_min = (dist_km / 5.0) * 60
+                transfer_time_min = round(2.0 + walk_time_min, 2)  # 2 phút overhead do tần suất thấp hơn metro
                 # Vé waterbus 15,000đ -> gán 7,500đ cho mỗi chiều chuyển tiếp
                 G.add_edge(
                     nearest_road_node,
                     station_node_id,
                     length=dist_km * 1000,
-                    travel_time=8.0,
+                    travel_time=transfer_time_min,
                     mode="transfer",
                     transfer_type="waterbus",
                     cost=7500.0,
@@ -267,7 +274,7 @@ def connect_multimodal_layers(G, metro_df, waterbus_df, max_transfer_dist_km=0.5
                     station_node_id,
                     nearest_road_node,
                     length=dist_km * 1000,
-                    travel_time=8.0,
+                    travel_time=transfer_time_min,
                     mode="transfer",
                     transfer_type="waterbus",
                     cost=7500.0,
