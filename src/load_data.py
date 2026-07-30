@@ -20,6 +20,10 @@ def clean_dataframe(df):
 
 def load_data(data_dir="data"):
     print("[1/7] Loading and cleaning data...")
+    # Tự động định vị thư mục data dựa theo vị trí file load_data.py nếu chạy từ thư mục src
+    if not os.path.exists(data_dir):
+        base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        data_dir = os.path.join(base_dir, "data")
     try:
         metro = pd.read_csv(os.path.join(data_dir, "metro.csv"))
         waterbus = pd.read_csv(os.path.join(data_dir, "waterbus.csv"))
