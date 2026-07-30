@@ -37,7 +37,6 @@ def get_best_edge_data(G_sub, u, v, traffic_condition):
 
 
 def make_weight_fn(traffic):
-    """Factory function — FIX CLOSURE BUG: capture traffic by value, not reference."""
     def get_weight(u, v, edge_dict):
         min_w = float("inf")
         for key, d in edge_dict.items():
@@ -50,7 +49,6 @@ def make_weight_fn(traffic):
 
 
 def compute_route_metrics(G_sub, path, traffic):
-    """Tính toán dist, time, co2, cost, modes cho 1 lộ trình."""
     dist_km = time_min = co2_emit = cost_vnd = 0.0
     modes_used = set()
     for i in range(len(path) - 1):
@@ -77,14 +75,11 @@ def routing(G, orders_df, hubs_df):
     skipped_same_node = 0
 
     road_nodes = [n for n, d in G.nodes(data=True)
-                  if d.get("mode") not in ["metro_station", "waterbus_station"]]
+                  if isinstance(n, int) and d.get("mode") not in ["metro_station", "waterbus_station", "hub_candidate"]]
     G_road = G.subgraph(road_nodes)
 
     traffic_conditions = ["Off-Peak", "Peak"]
 
-    # ===================================================================
-    # 4 kịch bản phương tiện CHUẨN (nearest-hub)
-    # ===================================================================
     scenarios = {
         "Road Only":        ["road"],
         "Road + Metro":     ["road", "metro", "transfer"],
@@ -92,11 +87,6 @@ def routing(G, orders_df, hubs_df):
         "Full Multimodal":  ["road", "metro", "waterbus", "transfer"],
     }
 
-    # ===================================================================
-    # THÊM: 4 kịch bản "Centralized" — xuất phát từ Hub trung tâm Q1
-    # Đây là kịch bản thực tế khi hàng tập kết tại 1 hub trung tâm
-    # rồi phân phối ra toàn thành phố qua hệ thống đa phương thức
-    # ===================================================================
     centralized_scenarios = {
         "Central Road Only":       ["road"],
         "Central Road + Metro":    ["road", "metro", "transfer"],
@@ -104,7 +94,6 @@ def routing(G, orders_df, hubs_df):
         "Central Full Multimodal": ["road", "metro", "waterbus", "transfer"],
     }
 
-    # Pre-filter subgraphs để tránh lặp lại G.edges() cho từng đơn
     def build_subgraph_cache(scenario_dict):
         cache = {}
         for scenario_name, allowed_modes in scenario_dict.items():
@@ -126,17 +115,14 @@ def routing(G, orders_df, hubs_df):
     subgraph_cache  = build_subgraph_cache(scenarios)
     central_cache   = build_subgraph_cache(centralized_scenarios)
 
-    # Kiểm tra transfer edges
     metro_t  = sum(1 for u,v,k,d in G.edges(keys=True,data=True) if d.get("mode")=="transfer" and d.get("transfer_type")=="metro")
     water_t  = sum(1 for u,v,k,d in G.edges(keys=True,data=True) if d.get("mode")=="transfer" and d.get("transfer_type")=="waterbus")
     print(f"  -> Transfer edges connected: Metro={metro_t}, Waterbus={water_t}")
 
-    # Ánh xạ hub_id → node đường bộ gần nhất
     hub_nodes = {}
     for _, hub in hubs_df.iterrows():
         hub_nodes[hub["hub_id"]] = ox.distance.nearest_nodes(G_road, X=hub["lon"], Y=hub["lat"])
 
-    # ===== Tìm hub trung tâm (Q1 - gần Ben Thanh nhất) cho Centralized scenario =====
     central_hub = hubs_df.loc[hubs_df.apply(
         lambda r: haversine_km(r["lat"], r["lon"], 10.7721, 106.6983), axis=1
     ).idxmin()]
@@ -146,7 +132,6 @@ def routing(G, orders_df, hubs_df):
     for order_idx, order in orders_df.iterrows():
         order_node = ox.distance.nearest_nodes(G_road, X=order["lon"], Y=order["lat"])
 
-        # --- Scenario CHUẨN: nearest hub → customer ---
         nearest_hub = get_nearest_hub(order["lat"], order["lon"], hubs_df)
         hub_node = hub_nodes[nearest_hub["hub_id"]]
 
@@ -174,7 +159,6 @@ def routing(G, orders_df, hubs_df):
                     except (nx.NetworkXNoPath, nx.NodeNotFound):
                         pass
 
-        # --- Scenario TẬP TRUNG: central hub → customer (nếu hub khác nhau) ---
         if central_hub_node == order_node:
             continue
         for traffic in traffic_conditions:

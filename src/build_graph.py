@@ -10,7 +10,8 @@ ox.settings.log_console = True
 
 
 def calculate_distance(lat1, lon1, lat2, lon2):
-    R = 6371  # Bán kính trái đất (km)
+    """Tính khoảng cách Haversine giữa 2 tọa độ (km)."""
+    R = 6371  # Bán kính Trái Đất (km)
     dlat = math.radians(lat2 - lat1)
     dlon = math.radians(lon2 - lon1)
     a = (
@@ -23,10 +24,10 @@ def calculate_distance(lat1, lon1, lat2, lon2):
 
 
 def add_waterbus_layer(G, df, speed_kmh=20, co2_factor=0.05):
-    """Giữ nguyên logic nối tuần tự cho bến sông (Waterbus)"""
+    """Khởi tạo các bến sông (Waterbus) và tạo liên kết 2 chiều tuần tự."""
     for idx, row in df.iterrows():
         node_id = f"waterbus_{idx}"
-        # Khởi tạo Node với thuộc tính tên ga thực tế từ CSV để chuẩn hóa đối chiếu
+        # Đánh dấu node bến Waterbus với thuộc tính tên trạm và vị trí tọa độ
         G.add_node(
             node_id,
             y=row["lat"],
@@ -65,34 +66,29 @@ def add_waterbus_layer(G, df, speed_kmh=20, co2_factor=0.05):
 
 
 def normalize_name(name):
+    """Chuẩn hóa tên ga phục vụ đối chiếu dữ liệu."""
     name = str(name).strip().lower()
-    # Loại bỏ dấu tiếng Việt
     name = unicodedata.normalize("NFKD", name)
     name = "".join([c for c in name if not unicodedata.combining(c)])
     name = name.replace("đ", "d")
-    # Loại bỏ ký tự đặc biệt
     name = re.sub(r"[^a-z0-9]", "", name)
-    # Chuẩn hóa viết tắt viết thường
     name = name.replace("tp", "thanhpho")
     name = name.replace("kcncao", "khucongnghecao")
     name = name.replace("kcn", "khucongnghecao")
     name = name.replace("dhqg", "daihocquocgia")
     name = name.replace("bxmmoi", "benxemiendongmoi")
     name = name.replace("miendong", "benxemiendongmoi")
-    name = name.replace("suoitien", "daihocquocgia")  # Suối Tiên quy về ĐHQG/BXM Mới
+    name = name.replace("suoitien", "daihocquocgia")
     return name
 
 
 def add_metro_layer_with_edges(
     G, metro_df, edges_df, speed_kmh=40, co2_factor=0.02
 ):
-    """Khởi tạo tất cả ga Metro và nối các ga dựa trên file HCMC_Metro_Edges.csv
-
-    có chuẩn hóa tên và dự phòng kết nối tuần tự
-    """
+    """Khởi tạo tất cả ga Metro và nối các ga dựa trên file HCMC_Metro_Edges.csv."""
     station_coords = {}
 
-    # Bước 1: Thêm toàn bộ các ga (Nodes) vào đồ thị
+    # Bước 1: Thêm toàn bộ ga Metro (Nodes) vào đồ thị
     for _, row in metro_df.iterrows():
         station_name = row["name"].strip()
         node_id = f"metro_{station_name}"
@@ -103,11 +99,10 @@ def add_metro_layer_with_edges(
             mode="metro_station",
             station_name=station_name,
         )
-        # Lưu tọa độ và tên gốc theo tên đã chuẩn hóa
         norm_name = normalize_name(station_name)
         station_coords[norm_name] = (row["lat"], row["lon"], station_name)
 
-    # Bước 2: Duyệt qua file Edges để vẽ các đoạn đường ray nối giữa các ga
+    # Bước 2: Duyệt qua file Edges để vẽ các đường ray nối giữa các ga
     for _, edge in edges_df.iterrows():
         from_st = str(edge["from_station"]).strip()
         to_st = str(edge["to_station"]).strip()
@@ -115,7 +110,6 @@ def add_metro_layer_with_edges(
         norm_from = normalize_name(from_st)
         norm_to = normalize_name(to_st)
 
-        # Kiểm tra xem cả 2 ga này có tồn tại trong file tọa độ metro.csv không
         if norm_from in station_coords and norm_to in station_coords:
             coord_u = station_coords[norm_from]
             coord_v = station_coords[norm_to]
@@ -127,7 +121,6 @@ def add_metro_layer_with_edges(
             )
             time_min = (dist_km / speed_kmh) * 60
 
-            # Tạo liên kết 2 chiều cho đường ray Metro
             G.add_edge(
                 node_u,
                 node_v,
@@ -149,7 +142,7 @@ def add_metro_layer_with_edges(
                 cost=0.0,
             )
 
-    # Bước 3: Tự động nối tuần tự các ga Metro Line 1 làm dự phòng
+    # Bước 3: Nối tuần tự dự phòng cho Metro Line 1
     for i in range(len(metro_df) - 1):
         row_u = metro_df.iloc[i]
         row_v = metro_df.iloc[i + 1]
@@ -184,18 +177,33 @@ def add_metro_layer_with_edges(
             )
 
 
-def connect_multimodal_layers(G, metro_df, waterbus_df, max_transfer_dist_km=1.5):
-    print("  -> Connecting Metro and Waterbus stations to Road Network...")
+def add_hub_candidates_layer(G, hubs_df):
+    """Đánh dấu tọa độ 15 ứng viên Hub vào đồ thị."""
+    for idx, row in hubs_df.iterrows():
+        node_id = f"hub_{row['hub_id']}"
+        G.add_node(
+            node_id,
+            y=float(row["lat"]),
+            x=float(row["lon"]),
+            mode="hub_candidate",
+            hub_name=str(row["name"]).strip(),
+            hub_id=row["hub_id"],
+        )
+
+
+def connect_multimodal_layers(G, metro_df, waterbus_df, hubs_df=None, max_transfer_dist_km=1.5):
+    """Kết nối ga Metro, bến Waterbus và các Hub ứng viên vào mạng lưới đường bộ Quận 1."""
+    print("  -> Connecting Metro, Waterbus stations & Hub candidates to District 1 Road Network...")
     road_nodes = [
         n
         for n, d in G.nodes(data=True)
-        if d.get("mode") not in ["metro_station", "waterbus_station"]
+        if isinstance(n, int) and d.get("mode") not in ["metro_station", "waterbus_station", "hub_candidate"]
     ]
     G_road = G.subgraph(road_nodes)
 
-    # Kết nối ga Metro với điểm giao thông đường bộ gần nhất
+    # 1. Kết nối ga Metro với node đường bộ gần nhất
     for _, row in metro_df.iterrows():
-        station_name = row["name"].strip()
+        station_name = str(row["name"]).strip()
         station_node_id = f"metro_{station_name}"
         if station_node_id in G.nodes:
             nearest_road_node = ox.distance.nearest_nodes(
@@ -207,43 +215,32 @@ def connect_multimodal_layers(G, metro_df, waterbus_df, max_transfer_dist_km=1.5
                 row["lat"], row["lon"], road_lat, road_lon
             )
 
-            if dist_km <= max_transfer_dist_km:
-                # Tính transfer_time động: 1 phút overhead + thời gian đi bộ (5 km/h)
-                # Thực tế hơn: ga gần (50m) chỉ mất ~1.6 phút, ga xa (500m) mất ~7 phút
-                walk_time_min = (dist_km / 5.0) * 60  # vận tốc đi bộ 5 km/h
-                transfer_time_min = round(1.0 + walk_time_min, 2)  # 1 phút overhead cố định
-                # Vé metro 15,000đ -> gán 7,500đ cho mỗi chiều chuyển tiếp
-                G.add_edge(
-                    nearest_road_node,
-                    station_node_id,
-                    length=dist_km * 1000,
-                    travel_time=transfer_time_min,
-                    mode="transfer",
-                    transfer_type="metro",
-                    cost=7500.0,
-                    co2=0.0,
-                )
-                G.add_edge(
-                    station_node_id,
-                    nearest_road_node,
-                    length=dist_km * 1000,
-                    travel_time=transfer_time_min,
-                    mode="transfer",
-                    transfer_type="metro",
-                    cost=7500.0,
-                    co2=0.0,
-                )
-                print(
-                    f"     [Connect] Metro ga: {station_name} <-> Đường bộ node: {nearest_road_node} ({dist_km:.3f} km)"
-                )
-            else:
-                print(
-                    f"     [Skip] Metro ga {station_name} quá xa mạng đường bộ Q1 ({dist_km:.3f} km)"
-                )
+            walk_time_min = (dist_km / 5.0) * 60  # Đi bộ 5 km/h
+            transfer_time_min = round(1.0 + walk_time_min, 2)  # 1 phút overhead
+            G.add_edge(
+                nearest_road_node,
+                station_node_id,
+                length=dist_km * 1000,
+                travel_time=transfer_time_min,
+                mode="transfer",
+                transfer_type="metro",
+                cost=7500.0,
+                co2=0.0,
+            )
+            G.add_edge(
+                station_node_id,
+                nearest_road_node,
+                length=dist_km * 1000,
+                travel_time=transfer_time_min,
+                mode="transfer",
+                transfer_type="metro",
+                cost=7500.0,
+                co2=0.0,
+            )
 
-    # Kết nối bến Waterbus với điểm giao thông đường bộ gần nhất
+    # 2. Kết nối bến Waterbus với node đường bộ gần nhất
     for idx, row in waterbus_df.iterrows():
-        station_name = row["name"].strip()
+        station_name = str(row["name"]).strip()
         station_node_id = f"waterbus_{idx}"
         if station_node_id in G.nodes:
             nearest_road_node = ox.distance.nearest_nodes(
@@ -255,37 +252,61 @@ def connect_multimodal_layers(G, metro_df, waterbus_df, max_transfer_dist_km=1.5
                 row["lat"], row["lon"], road_lat, road_lon
             )
 
-            if dist_km <= max_transfer_dist_km:
-                # Tính transfer_time động: 2 phút overhead (đợi tàu) + thời gian đi bộ (5 km/h)
-                walk_time_min = (dist_km / 5.0) * 60
-                transfer_time_min = round(2.0 + walk_time_min, 2)  # 2 phút overhead do tần suất thấp hơn metro
-                # Vé waterbus 15,000đ -> gán 7,500đ cho mỗi chiều chuyển tiếp
+            walk_time_min = (dist_km / 5.0) * 60  # Đi bộ 5 km/h
+            transfer_time_min = round(2.0 + walk_time_min, 2)  # 2 phút overhead chờ tàu
+            G.add_edge(
+                nearest_road_node,
+                station_node_id,
+                length=dist_km * 1000,
+                travel_time=transfer_time_min,
+                mode="transfer",
+                transfer_type="waterbus",
+                cost=7500.0,
+                co2=0.0,
+            )
+            G.add_edge(
+                station_node_id,
+                nearest_road_node,
+                length=dist_km * 1000,
+                travel_time=transfer_time_min,
+                mode="transfer",
+                transfer_type="waterbus",
+                cost=7500.0,
+                co2=0.0,
+            )
+
+    # 3. Kết nối 15 Hub ứng viên vào node đường bộ gần nhất
+    if hubs_df is not None:
+        for _, row in hubs_df.iterrows():
+            hub_node_id = f"hub_{row['hub_id']}"
+            if hub_node_id in G.nodes:
+                nearest_road_node = ox.distance.nearest_nodes(
+                    G_road, X=row["lon"], Y=row["lat"]
+                )
+                road_lat = G.nodes[nearest_road_node]["y"]
+                road_lon = G.nodes[nearest_road_node]["x"]
+                dist_km = calculate_distance(
+                    row["lat"], row["lon"], road_lat, road_lon
+                )
                 G.add_edge(
                     nearest_road_node,
-                    station_node_id,
+                    hub_node_id,
                     length=dist_km * 1000,
-                    travel_time=transfer_time_min,
+                    travel_time=dist_km * 2,
                     mode="transfer",
-                    transfer_type="waterbus",
-                    cost=7500.0,
+                    transfer_type="hub",
+                    cost=0.0,
                     co2=0.0,
                 )
                 G.add_edge(
-                    station_node_id,
+                    hub_node_id,
                     nearest_road_node,
                     length=dist_km * 1000,
-                    travel_time=transfer_time_min,
+                    travel_time=dist_km * 2,
                     mode="transfer",
-                    transfer_type="waterbus",
-                    cost=7500.0,
+                    transfer_type="hub",
+                    cost=0.0,
                     co2=0.0,
-                )
-                print(
-                    f"     [Connect] Waterbus bến: {station_name} <-> Đường bộ node: {nearest_road_node} ({dist_km:.3f} km)"
-                )
-            else:
-                print(
-                    f"     [Skip] Waterbus bến {station_name} quá xa mạng đường bộ Q1 ({dist_km:.3f} km)"
                 )
 
 
@@ -297,28 +318,20 @@ def build_graph(
     orders_df,
     save_path="results/multimodal_graph.pkl",
 ):
-    print("[2/7] Building Multimodal Graph with dynamic Bounding Box...")
+    """Xây dựng Đồ thị Đa phương thức sử dụng OSMnx lấy riêng bản đồ Quận 1."""
+    print("[2/7] Fetching District 1 map via OSMnx & Building Multimodal Graph...")
 
-    # Tính toán bounding box bao phủ toàn bộ hệ thống (biên an toàn 0.015 độ)
-    all_lats = pd.concat(
-        [metro_df["lat"], waterbus_df["lat"], hubs_df["lat"], orders_df["lat"]]
-    )
-    all_lons = pd.concat(
-        [metro_df["lon"], waterbus_df["lon"], hubs_df["lon"], orders_df["lon"]]
-    )
-
-    west = all_lons.min() - 0.015
-    east = all_lons.max() + 0.015
-    south = all_lats.min() - 0.015
-    north = all_lats.max() + 0.015
-
-    bbox = (west, south, east, north)
-    print(
-        f"  -> Calculated system bounding box: west={west:.4f}, south={south:.4f}, east={east:.4f}, north={north:.4f}"
-    )
-
-    # 1. Tải Road Graph từ OpenStreetMap bằng Bounding Box
-    G = ox.graph_from_bbox(bbox=bbox, network_type="drive")
+    # 1. Tải bản đồ giao thông đường bộ Quận 1 từ OpenStreetMap
+    place_name = "District 1, Ho Chi Minh City, Vietnam"
+    try:
+        G = ox.graph_from_place(place_name, network_type="drive")
+        print(f"  -> Successfully loaded District 1 road map ({len(G)} nodes).")
+    except Exception as e:
+        print(f"  [!] Fallback to bounding box fetch for District 1: {e}")
+        all_lats = pd.concat([metro_df["lat"], waterbus_df["lat"], hubs_df["lat"], orders_df["lat"]])
+        all_lons = pd.concat([metro_df["lon"], waterbus_df["lon"], hubs_df["lon"], orders_df["lon"]])
+        bbox = (all_lons.min() - 0.015, all_lats.min() - 0.015, all_lons.max() + 0.015, all_lats.max() + 0.015)
+        G = ox.graph_from_bbox(bbox=bbox, network_type="drive")
 
     # Gán thuộc tính mặc định cho đường bộ
     for u, v, key, data in G.edges(keys=True, data=True):
@@ -326,23 +339,22 @@ def build_graph(
         data["travel_time"] = (length_km / 30) * 60  # Vận tốc shipper 30 km/h
         data["mode"] = "road"
         data["co2"] = 0.12
-        data["cost"] = (
-            length_km * 3000.0
-        )  # Chi phí xe máy xăng/khấu hao: 3,000 VND / km
+        data["cost"] = length_km * 3000.0  # Chi phí xe máy 3,000 VND / km
 
-    # 2. Áp dụng các tầng giao thông công cộng đầu vào công nghệ cao
+    # 2. Đánh dấu các tầng giao thông công cộng & 15 Hub ứng viên
     add_metro_layer_with_edges(
         G, metro_df, metro_edges_df, speed_kmh=40, co2_factor=0.02
     )
     add_waterbus_layer(G, waterbus_df, speed_kmh=20, co2_factor=0.05)
+    add_hub_candidates_layer(G, hubs_df)
 
     # 3. Kết nối liên thông mạng lưới đa phương thức
-    connect_multimodal_layers(G, metro_df, waterbus_df)
+    connect_multimodal_layers(G, metro_df, waterbus_df, hubs_df)
 
     with open(save_path, "wb") as f:
         pickle.dump(G, f)
 
     print(
-        "  -> Graph saved completely with multi-line Metro connectivity and transfer edges."
+        "  -> Graph saved successfully with District 1 road network, Metro, Waterbus, and 15 Hub candidates."
     )
     return G
