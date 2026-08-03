@@ -1,7 +1,7 @@
 road_type,weather,is_rush_hour,actual_speed_kmh
 primary,clear,1,28.17
 residential,clear,0,28.21
-secondary,clear,0,37.5
+secondary,clear,0,37.5  
 secondary,light_rain,0,35.46
 primary,clear,0,42.69
 primary,heavy_rain,1,21.27

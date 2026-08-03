@@ -1,92 +1,14 @@
-Edge_ID,Line,From_Station,To_Station,Weight
-1,Metro 1,An Hạ,Tân Tạo,1
-2,Metro 1,Tân Tạo,Bình Tân,1
-3,Metro 1,Bình Tân,Bến Xe Miền Tây,1
-4,Metro 1,Bến Xe Miền Tây,Phú Lâm,1
-5,Metro 1,Phú Lâm,Hậu Giang,1
-6,Metro 1,Hậu Giang,An Đông,1
-7,Metro 1,An Đông,Bến Thành,1
-8,Metro 1,Bến Thành,Nhà Hát TP,1
-9,Metro 1,Nhà Hát TP,Ba Son,1
-10,Metro 1,Ba Son,Văn Thánh,1
-11,Metro 1,Văn Thánh,Tân Cảng,1
-12,Metro 1,Tân Cảng,Thảo Điền,1
-13,Metro 1,Thảo Điền,An Phú,1
-14,Metro 1,An Phú,Rạch Chiếc,1
-15,Metro 1,Rạch Chiếc,Phước Long,1
-16,Metro 1,Phước Long,Bình Thái,1
-17,Metro 1,Bình Thái,Thủ Đức,1
-18,Metro 1,Thủ Đức,KCN Cao,1
-19,Metro 1,KCN Cao,Suối Tiên,1
-20,Metro 2,Củ Chi,Tân Thạnh Đông,1
-21,Metro 2,Tân Thạnh Đông,Bình Mỹ,1
-22,Metro 2,Bình Mỹ,Tân Quy,1
-23,Metro 2,Tân Quy,Trung Chánh,1
-24,Metro 2,Trung Chánh,Tham Lương,1
-25,Metro 2,Tham Lương,Tây Thạnh,1
-26,Metro 2,Tây Thạnh,Bảy Hiền,1
-27,Metro 2,Bảy Hiền,Phạm Văn Hai,1
-28,Metro 2,Phạm Văn Hai,Dân Chủ,1
-29,Metro 2,Dân Chủ,Bến Thành,1
-30,Metro 2,Bến Thành,Thủ Thiêm,1
-31,Metro 2,Thủ Thiêm,An Khánh,1
-32,Metro 2,An Khánh,Cát Lái,1
-33,Metro 2,Cát Lái,Bình Trưng,1
-34,Metro 2,Bình Trưng,Long Trường,1
-35,Metro 3,Hiệp Bình Phước,Tam Bình,1
-36,Metro 3,Tam Bình,Gò Vấp,1
-37,Metro 3,Gò Vấp,Nguyễn Kiệm,1
-38,Metro 3,Nguyễn Kiệm,Công Viên Gia Định,1
-39,Metro 3,Công Viên Gia Định,Dân Chủ,1
-40,Metro 3,Dân Chủ,Nguyễn Văn Cừ,1
-41,Metro 3,Nguyễn Văn Cừ,Quận 5,1
-42,Metro 3,Quận 5,Chợ Lớn,1
-43,Metro 3,Chợ Lớn,Bình Chánh,1
-44,Metro 3,Bình Chánh,Tân Kiên,1
-45,Metro 3,Tân Kiên,An Hạ,1
-46,Metro 4,Đông Thạnh,Ngã Sáu Gò Vấp,1
-47,Metro 4,Ngã Sáu Gò Vấp,Hạnh Thông Tây,1
-48,Metro 4,Hạnh Thông Tây,Sân Bay,1
-49,Metro 4,Sân Bay,Bảy Hiền,1
-50,Metro 4,Bảy Hiền,Dân Chủ,1
-51,Metro 4,Dân Chủ,Bến Thành,1
-52,Metro 4,Bến Thành,Khánh Hội,1
-53,Metro 4,Khánh Hội,Tân Thuận,1
-54,Metro 4,Tân Thuận,Quận 7,1
-55,Metro 4,Quận 7,Phú Mỹ,1
-56,Metro 4,Phú Mỹ,Hiệp Phước,1
-57,Metro 5,Long Trường,Phú Hữu,1
-58,Metro 5,Phú Hữu,Rạch Chiếc,1
-59,Metro 5,Rạch Chiếc,Cầu Sài Gòn,1
-60,Metro 5,Cầu Sài Gòn,Hàng Xanh,1
-61,Metro 5,Hàng Xanh,Nguyễn Văn Trỗi,1
-62,Metro 5,Nguyễn Văn Trỗi,Bảy Hiền,1
-63,Metro 5,Bảy Hiền,Tân Sơn,1
-64,Metro 5,Tân Sơn,Tân Túc,1
-65,Metro 5,Tân Túc,Đa Phước,1
-66,Metro 6,VĐ1,VĐ2,1
-67,Metro 6,VĐ2,VĐ3,1
-68,Metro 6,VĐ3,VĐ4,1
-69,Metro 6,VĐ4,VĐ5,1
-70,Metro 6,VĐ5,VĐ6,1
-71,Metro 6,VĐ6,VĐ7,1
-72,Metro 6,VĐ7,VĐ8,1
-73,Metro 6,VĐ8,VĐ9,1
-74,Metro 6,VĐ9,VĐ10,1
-75,Metro 6,VĐ10,VĐ11,1
-76,Metro 6,VĐ11,VĐ12,1
-77,Metro 6,VĐ12,VĐ13,1
-78,Metro 6,VĐ13,VĐ14,1
-79,Metro 6,VĐ14,VĐ15,1
-80,Metro 6,VĐ15,VĐ16,1
-81,Metro 6,VĐ16,VĐ17,1
-82,Metro 6,VĐ17,VĐ18,1
-83,Metro 6,VĐ18,VĐ19,1
-84,Metro 6,VĐ19,VĐ20,1
-85,Metro 7,Tân Kiên,An Lạc,1
-86,Metro 7,An Lạc,Quận 8,1
-87,Metro 7,Quận 8,Võ Văn Kiệt,1
-88,Metro 7,Võ Văn Kiệt,Bến Thành,1
-89,Metro 7,Bến Thành,Thủ Thiêm,1
-90,Metro 7,Thủ Thiêm,An Phú,1
-91,Metro 7,An Phú,Long Bình,1
+Edge_ID,Line,From_Station,To_Station,Weight_km
+1,Metro 1,Ben Thanh,Nha Hat Thanh Pho,0.69
+2,Metro 1,Nha Hat Thanh Pho,Ba Son,1.07
+3,Metro 1,Ba Son,Van Thanh,1.73
+4,Metro 1,Van Thanh,Tan Cang,0.95
+5,Metro 1,Tan Cang,Thao Dien,1.15
+6,Metro 1,Thao Dien,An Phu,1.0
+7,Metro 1,An Phu,Rach Chiec,1.54
+8,Metro 1,Rach Chiec,Phuoc Long,1.62
+9,Metro 1,Phuoc Long,Binh Thai,1.24
+10,Metro 1,Binh Thai,Thu Duc,1.75
+11,Metro 1,Thu Duc,Khu Cong Nghe Cao,2.27
+12,Metro 1,Khu Cong Nghe Cao,Dai Hoc Quoc Gia,1.65
+13,Metro 1,Dai Hoc Quoc Gia,Ben Xe Mien Dong Moi,2.17
