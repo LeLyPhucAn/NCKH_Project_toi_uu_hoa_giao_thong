@@ -11,8 +11,8 @@ waterbus = pd.read_csv(os.path.join(DATA_DIR, "waterbus.csv"))
 hub = pd.read_csv(os.path.join(DATA_DIR, "hub_candidates.csv"))
 orders = pd.read_csv(os.path.join(DATA_DIR, "orders.csv"))
 
-print("Metro preview:")
-print(metro.head())
+# print("Metro preview:")
+# print(metro.head())
 
 # Tọa độ trung tâm của bản đồ (ví dụ: trung tâm TP.HCM)
 m = folium.Map(location=[10.7769, 106.7009], zoom_start=12)
