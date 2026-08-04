@@ -1,12 +1,12 @@
 traffic_condition,scenario,avg_time_min,total_distance_km,avg_distance_km,total_cost_vnd,avg_cost_vnd,total_co2_kg,avg_co2_kg,delivery_count,multimodal_used,hub_strategy
-Off-Peak,Full Multimodal,3.11,271.89,1.55,815677.06,4661.01,32.63,0.19,175,0,nearest
-Off-Peak,Road + Metro,3.11,271.89,1.55,815677.06,4661.01,32.63,0.19,175,0,nearest
-Off-Peak,Road + Waterbus,3.11,271.89,1.55,815677.06,4661.01,32.63,0.19,175,0,nearest
-Off-Peak,Road Only,3.11,271.89,1.55,815677.06,4661.01,32.63,0.19,175,0,nearest
-Peak,Full Multimodal,7.77,271.89,1.55,815677.06,4661.01,32.63,0.19,175,0,nearest
-Peak,Road + Metro,7.77,271.89,1.55,815677.06,4661.01,32.63,0.19,175,0,nearest
-Peak,Road + Waterbus,7.77,271.89,1.55,815677.06,4661.01,32.63,0.19,175,0,nearest
-Peak,Road Only,7.77,271.89,1.55,815677.06,4661.01,32.63,0.19,175,0,nearest
+Off-Peak,Full Multimodal,3.05,266.68,1.52,800044.22,4571.68,32.0,0.18,175,0,nearest
+Off-Peak,Road + Metro,3.05,266.68,1.52,800044.22,4571.68,32.0,0.18,175,0,nearest
+Off-Peak,Road + Waterbus,3.05,266.68,1.52,800044.22,4571.68,32.0,0.18,175,0,nearest
+Off-Peak,Road Only,3.05,266.68,1.52,800044.22,4571.68,32.0,0.18,175,0,nearest
+Peak,Full Multimodal,7.62,266.68,1.52,800044.22,4571.68,32.0,0.18,175,0,nearest
+Peak,Road + Metro,7.62,266.68,1.52,800044.22,4571.68,32.0,0.18,175,0,nearest
+Peak,Road + Waterbus,7.62,266.68,1.52,800044.22,4571.68,32.0,0.18,175,0,nearest
+Peak,Road Only,7.62,266.68,1.52,800044.22,4571.68,32.0,0.18,175,0,nearest
 Off-Peak,Central Full Multimodal,4.99,728.94,2.5,2186837.99,7489.17,87.48,0.3,292,0,centralized
 Off-Peak,Central Road + Metro,4.99,728.94,2.5,2186837.99,7489.17,87.48,0.3,292,0,centralized
 Off-Peak,Central Road + Waterbus,4.99,728.94,2.5,2186837.99,7489.17,87.48,0.3,292,0,centralized

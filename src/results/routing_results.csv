@@ -447,14 +447,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 31,1,centralized,Peak,Central Road + Metro,2.0562,0.4112,1233.74,0.0493,road
 31,1,centralized,Peak,Central Road + Waterbus,2.0562,0.4112,1233.74,0.0493,road
 31,1,centralized,Peak,Central Full Multimodal,2.0562,0.4112,1233.74,0.0493,road
-32,2,nearest,Off-Peak,Road Only,2.3897,1.1949,3584.6,0.1434,road
-32,2,nearest,Off-Peak,Road + Metro,2.3897,1.1949,3584.6,0.1434,road
-32,2,nearest,Off-Peak,Road + Waterbus,2.3897,1.1949,3584.6,0.1434,road
-32,2,nearest,Off-Peak,Full Multimodal,2.3897,1.1949,3584.6,0.1434,road
-32,2,nearest,Peak,Road Only,5.9743,1.1949,3584.6,0.1434,road
-32,2,nearest,Peak,Road + Metro,5.9743,1.1949,3584.6,0.1434,road
-32,2,nearest,Peak,Road + Waterbus,5.9743,1.1949,3584.6,0.1434,road
-32,2,nearest,Peak,Full Multimodal,5.9743,1.1949,3584.6,0.1434,road
+32,6,nearest,Off-Peak,Road Only,2.2162,1.1081,3324.34,0.133,road
+32,6,nearest,Off-Peak,Road + Metro,2.2162,1.1081,3324.34,0.133,road
+32,6,nearest,Off-Peak,Road + Waterbus,2.2162,1.1081,3324.34,0.133,road
+32,6,nearest,Off-Peak,Full Multimodal,2.2162,1.1081,3324.34,0.133,road
+32,6,nearest,Peak,Road Only,5.5406,1.1081,3324.34,0.133,road
+32,6,nearest,Peak,Road + Metro,5.5406,1.1081,3324.34,0.133,road
+32,6,nearest,Peak,Road + Waterbus,5.5406,1.1081,3324.34,0.133,road
+32,6,nearest,Peak,Full Multimodal,5.5406,1.1081,3324.34,0.133,road
 32,1,centralized,Off-Peak,Central Road Only,3.8357,1.9179,5753.58,0.2301,road
 32,1,centralized,Off-Peak,Central Road + Metro,3.8357,1.9179,5753.58,0.2301,road
 32,1,centralized,Off-Peak,Central Road + Waterbus,3.8357,1.9179,5753.58,0.2301,road
@@ -1039,14 +1039,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 71,1,centralized,Peak,Central Road + Metro,5.8586,1.1717,3515.17,0.1406,road
 71,1,centralized,Peak,Central Road + Waterbus,5.8586,1.1717,3515.17,0.1406,road
 71,1,centralized,Peak,Central Full Multimodal,5.8586,1.1717,3515.17,0.1406,road
-72,2,nearest,Off-Peak,Road Only,1.9618,0.9809,2942.74,0.1177,road
-72,2,nearest,Off-Peak,Road + Metro,1.9618,0.9809,2942.74,0.1177,road
-72,2,nearest,Off-Peak,Road + Waterbus,1.9618,0.9809,2942.74,0.1177,road
-72,2,nearest,Off-Peak,Full Multimodal,1.9618,0.9809,2942.74,0.1177,road
-72,2,nearest,Peak,Road Only,4.9046,0.9809,2942.74,0.1177,road
-72,2,nearest,Peak,Road + Metro,4.9046,0.9809,2942.74,0.1177,road
-72,2,nearest,Peak,Road + Waterbus,4.9046,0.9809,2942.74,0.1177,road
-72,2,nearest,Peak,Full Multimodal,4.9046,0.9809,2942.74,0.1177,road
+72,6,nearest,Off-Peak,Road Only,2.4751,1.2376,3712.68,0.1485,road
+72,6,nearest,Off-Peak,Road + Metro,2.4751,1.2376,3712.68,0.1485,road
+72,6,nearest,Off-Peak,Road + Waterbus,2.4751,1.2376,3712.68,0.1485,road
+72,6,nearest,Off-Peak,Full Multimodal,2.4751,1.2376,3712.68,0.1485,road
+72,6,nearest,Peak,Road Only,6.1878,1.2376,3712.68,0.1485,road
+72,6,nearest,Peak,Road + Metro,6.1878,1.2376,3712.68,0.1485,road
+72,6,nearest,Peak,Road + Waterbus,6.1878,1.2376,3712.68,0.1485,road
+72,6,nearest,Peak,Full Multimodal,6.1878,1.2376,3712.68,0.1485,road
 72,1,centralized,Off-Peak,Central Road Only,3.4078,1.7039,5111.72,0.2045,road
 72,1,centralized,Off-Peak,Central Road + Metro,3.4078,1.7039,5111.72,0.2045,road
 72,1,centralized,Off-Peak,Central Road + Waterbus,3.4078,1.7039,5111.72,0.2045,road
@@ -1199,14 +1199,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 82,1,centralized,Peak,Central Road + Metro,6.3697,1.2739,3821.81,0.1529,road
 82,1,centralized,Peak,Central Road + Waterbus,6.3697,1.2739,3821.81,0.1529,road
 82,1,centralized,Peak,Central Full Multimodal,6.3697,1.2739,3821.81,0.1529,road
-83,2,nearest,Off-Peak,Road Only,2.6076,1.3038,3911.33,0.1565,road
-83,2,nearest,Off-Peak,Road + Metro,2.6076,1.3038,3911.33,0.1565,road
-83,2,nearest,Off-Peak,Road + Waterbus,2.6076,1.3038,3911.33,0.1565,road
-83,2,nearest,Off-Peak,Full Multimodal,2.6076,1.3038,3911.33,0.1565,road
-83,2,nearest,Peak,Road Only,6.5189,1.3038,3911.33,0.1565,road
-83,2,nearest,Peak,Road + Metro,6.5189,1.3038,3911.33,0.1565,road
-83,2,nearest,Peak,Road + Waterbus,6.5189,1.3038,3911.33,0.1565,road
-83,2,nearest,Peak,Full Multimodal,6.5189,1.3038,3911.33,0.1565,road
+83,6,nearest,Off-Peak,Road Only,2.8435,1.4218,4265.31,0.1706,road
+83,6,nearest,Off-Peak,Road + Metro,2.8435,1.4218,4265.31,0.1706,road
+83,6,nearest,Off-Peak,Road + Waterbus,2.8435,1.4218,4265.31,0.1706,road
+83,6,nearest,Off-Peak,Full Multimodal,2.8435,1.4218,4265.31,0.1706,road
+83,6,nearest,Peak,Road Only,7.1088,1.4218,4265.31,0.1706,road
+83,6,nearest,Peak,Road + Metro,7.1088,1.4218,4265.31,0.1706,road
+83,6,nearest,Peak,Road + Waterbus,7.1088,1.4218,4265.31,0.1706,road
+83,6,nearest,Peak,Full Multimodal,7.1088,1.4218,4265.31,0.1706,road
 83,1,centralized,Off-Peak,Central Road Only,4.0535,2.0268,6080.31,0.2432,road
 83,1,centralized,Off-Peak,Central Road + Metro,4.0535,2.0268,6080.31,0.2432,road
 83,1,centralized,Off-Peak,Central Road + Waterbus,4.0535,2.0268,6080.31,0.2432,road
@@ -1895,14 +1895,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 128,1,centralized,Peak,Central Road + Metro,13.4029,3.309,19207.33,0.2035,metro+road+transfer
 128,1,centralized,Peak,Central Road + Waterbus,16.2057,3.2411,9723.43,0.3889,road
 128,1,centralized,Peak,Central Full Multimodal,13.4029,3.309,19207.33,0.2035,metro+road+transfer
-129,4,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
-129,4,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
-129,4,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
-129,4,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
-129,4,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
-129,4,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
-129,4,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
-129,4,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
+129,5,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
+129,5,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
+129,5,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
+129,5,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
+129,5,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
+129,5,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
+129,5,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
+129,5,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
 129,1,centralized,Off-Peak,Central Road Only,7.496,3.748,11243.99,0.4498,road
 129,1,centralized,Off-Peak,Central Road + Metro,7.496,3.748,11243.99,0.4498,road
 129,1,centralized,Off-Peak,Central Road + Waterbus,7.496,3.748,11243.99,0.4498,road
@@ -1927,14 +1927,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 130,1,centralized,Peak,Central Road + Metro,18.74,3.748,11243.99,0.4498,road
 130,1,centralized,Peak,Central Road + Waterbus,18.74,3.748,11243.99,0.4498,road
 130,1,centralized,Peak,Central Full Multimodal,18.74,3.748,11243.99,0.4498,road
-131,4,nearest,Off-Peak,Road Only,6.6793,3.3397,10018.95,0.4008,road
-131,4,nearest,Off-Peak,Road + Metro,6.6793,3.3397,10018.95,0.4008,road
-131,4,nearest,Off-Peak,Road + Waterbus,6.6793,3.3397,10018.95,0.4008,road
-131,4,nearest,Off-Peak,Full Multimodal,6.6793,3.3397,10018.95,0.4008,road
-131,4,nearest,Peak,Road Only,16.6983,3.3397,10018.95,0.4008,road
-131,4,nearest,Peak,Road + Metro,16.6983,3.3397,10018.95,0.4008,road
-131,4,nearest,Peak,Road + Waterbus,16.6983,3.3397,10018.95,0.4008,road
-131,4,nearest,Peak,Full Multimodal,16.6983,3.3397,10018.95,0.4008,road
+131,6,nearest,Off-Peak,Road Only,5.4463,2.7232,8169.48,0.3268,road
+131,6,nearest,Off-Peak,Road + Metro,5.4463,2.7232,8169.48,0.3268,road
+131,6,nearest,Off-Peak,Road + Waterbus,5.4463,2.7232,8169.48,0.3268,road
+131,6,nearest,Off-Peak,Full Multimodal,5.4463,2.7232,8169.48,0.3268,road
+131,6,nearest,Peak,Road Only,13.6158,2.7232,8169.48,0.3268,road
+131,6,nearest,Peak,Road + Metro,13.6158,2.7232,8169.48,0.3268,road
+131,6,nearest,Peak,Road + Waterbus,13.6158,2.7232,8169.48,0.3268,road
+131,6,nearest,Peak,Full Multimodal,13.6158,2.7232,8169.48,0.3268,road
 131,1,centralized,Off-Peak,Central Road Only,7.7599,3.88,11639.89,0.4656,road
 131,1,centralized,Off-Peak,Central Road + Metro,7.7599,3.88,11639.89,0.4656,road
 131,1,centralized,Off-Peak,Central Road + Waterbus,7.7599,3.88,11639.89,0.4656,road
@@ -1959,14 +1959,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 132,1,centralized,Peak,Central Road + Metro,18.74,3.748,11243.99,0.4498,road
 132,1,centralized,Peak,Central Road + Waterbus,18.74,3.748,11243.99,0.4498,road
 132,1,centralized,Peak,Central Full Multimodal,18.74,3.748,11243.99,0.4498,road
-133,4,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
-133,4,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
-133,4,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
-133,4,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
-133,4,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
-133,4,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
-133,4,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
-133,4,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
+133,5,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
+133,5,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
+133,5,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
+133,5,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
+133,5,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
+133,5,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
+133,5,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
+133,5,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
 133,1,centralized,Off-Peak,Central Road Only,7.496,3.748,11243.99,0.4498,road
 133,1,centralized,Off-Peak,Central Road + Metro,7.496,3.748,11243.99,0.4498,road
 133,1,centralized,Off-Peak,Central Road + Waterbus,7.496,3.748,11243.99,0.4498,road
@@ -1991,14 +1991,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 134,1,centralized,Peak,Central Road + Metro,18.74,3.748,11243.99,0.4498,road
 134,1,centralized,Peak,Central Road + Waterbus,18.74,3.748,11243.99,0.4498,road
 134,1,centralized,Peak,Central Full Multimodal,18.74,3.748,11243.99,0.4498,road
-135,4,nearest,Off-Peak,Road Only,0.2155,0.1078,323.3,0.0129,road
-135,4,nearest,Off-Peak,Road + Metro,0.2155,0.1078,323.3,0.0129,road
-135,4,nearest,Off-Peak,Road + Waterbus,0.2155,0.1078,323.3,0.0129,road
-135,4,nearest,Off-Peak,Full Multimodal,0.2155,0.1078,323.3,0.0129,road
-135,4,nearest,Peak,Road Only,0.5388,0.1078,323.3,0.0129,road
-135,4,nearest,Peak,Road + Metro,0.5388,0.1078,323.3,0.0129,road
-135,4,nearest,Peak,Road + Waterbus,0.5388,0.1078,323.3,0.0129,road
-135,4,nearest,Peak,Full Multimodal,0.5388,0.1078,323.3,0.0129,road
+135,6,nearest,Off-Peak,Road Only,1.3942,0.6971,2091.33,0.0837,road
+135,6,nearest,Off-Peak,Road + Metro,1.3942,0.6971,2091.33,0.0837,road
+135,6,nearest,Off-Peak,Road + Waterbus,1.3942,0.6971,2091.33,0.0837,road
+135,6,nearest,Off-Peak,Full Multimodal,1.3942,0.6971,2091.33,0.0837,road
+135,6,nearest,Peak,Road Only,3.4855,0.6971,2091.33,0.0837,road
+135,6,nearest,Peak,Road + Metro,3.4855,0.6971,2091.33,0.0837,road
+135,6,nearest,Peak,Road + Waterbus,3.4855,0.6971,2091.33,0.0837,road
+135,6,nearest,Peak,Full Multimodal,3.4855,0.6971,2091.33,0.0837,road
 135,1,centralized,Off-Peak,Central Road Only,6.3543,3.1772,9531.5,0.3813,road
 135,1,centralized,Off-Peak,Central Road + Metro,6.3543,3.1772,9531.5,0.3813,road
 135,1,centralized,Off-Peak,Central Road + Waterbus,6.3543,3.1772,9531.5,0.3813,road
@@ -2095,14 +2095,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 142,1,centralized,Peak,Central Road + Metro,13.6219,3.3528,19338.71,0.2088,metro+road+transfer
 142,1,centralized,Peak,Central Road + Waterbus,16.4247,3.2849,9854.8,0.3942,road
 142,1,centralized,Peak,Central Full Multimodal,13.6219,3.3528,19338.71,0.2088,metro+road+transfer
-143,2,nearest,Off-Peak,Road Only,4.3732,2.1866,6559.82,0.2624,road
-143,2,nearest,Off-Peak,Road + Metro,4.3732,2.1866,6559.82,0.2624,road
-143,2,nearest,Off-Peak,Road + Waterbus,4.3732,2.1866,6559.82,0.2624,road
-143,2,nearest,Off-Peak,Full Multimodal,4.3732,2.1866,6559.82,0.2624,road
-143,2,nearest,Peak,Road Only,10.933,2.1866,6559.82,0.2624,road
-143,2,nearest,Peak,Road + Metro,10.933,2.1866,6559.82,0.2624,road
-143,2,nearest,Peak,Road + Waterbus,10.933,2.1866,6559.82,0.2624,road
-143,2,nearest,Peak,Full Multimodal,10.933,2.1866,6559.82,0.2624,road
+143,6,nearest,Off-Peak,Road Only,0.382,0.191,573.0,0.0229,road
+143,6,nearest,Off-Peak,Road + Metro,0.382,0.191,573.0,0.0229,road
+143,6,nearest,Off-Peak,Road + Waterbus,0.382,0.191,573.0,0.0229,road
+143,6,nearest,Off-Peak,Full Multimodal,0.382,0.191,573.0,0.0229,road
+143,6,nearest,Peak,Road Only,0.955,0.191,573.0,0.0229,road
+143,6,nearest,Peak,Road + Metro,0.955,0.191,573.0,0.0229,road
+143,6,nearest,Peak,Road + Waterbus,0.955,0.191,573.0,0.0229,road
+143,6,nearest,Peak,Full Multimodal,0.955,0.191,573.0,0.0229,road
 143,1,centralized,Off-Peak,Central Road Only,6.094,3.047,9141.04,0.3656,road
 143,1,centralized,Off-Peak,Central Road + Metro,6.094,3.047,9141.04,0.3656,road
 143,1,centralized,Off-Peak,Central Road + Waterbus,6.094,3.047,9141.04,0.3656,road
@@ -2143,14 +2143,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 145,1,centralized,Peak,Central Road + Metro,13.4029,3.309,19207.33,0.2035,metro+road+transfer
 145,1,centralized,Peak,Central Road + Waterbus,16.2057,3.2411,9723.43,0.3889,road
 145,1,centralized,Peak,Central Full Multimodal,13.4029,3.309,19207.33,0.2035,metro+road+transfer
-146,4,nearest,Off-Peak,Road Only,6.6793,3.3397,10018.95,0.4008,road
-146,4,nearest,Off-Peak,Road + Metro,6.6793,3.3397,10018.95,0.4008,road
-146,4,nearest,Off-Peak,Road + Waterbus,6.6793,3.3397,10018.95,0.4008,road
-146,4,nearest,Off-Peak,Full Multimodal,6.6793,3.3397,10018.95,0.4008,road
-146,4,nearest,Peak,Road Only,16.6983,3.3397,10018.95,0.4008,road
-146,4,nearest,Peak,Road + Metro,16.6983,3.3397,10018.95,0.4008,road
-146,4,nearest,Peak,Road + Waterbus,16.6983,3.3397,10018.95,0.4008,road
-146,4,nearest,Peak,Full Multimodal,16.6983,3.3397,10018.95,0.4008,road
+146,6,nearest,Off-Peak,Road Only,5.4463,2.7232,8169.48,0.3268,road
+146,6,nearest,Off-Peak,Road + Metro,5.4463,2.7232,8169.48,0.3268,road
+146,6,nearest,Off-Peak,Road + Waterbus,5.4463,2.7232,8169.48,0.3268,road
+146,6,nearest,Off-Peak,Full Multimodal,5.4463,2.7232,8169.48,0.3268,road
+146,6,nearest,Peak,Road Only,13.6158,2.7232,8169.48,0.3268,road
+146,6,nearest,Peak,Road + Metro,13.6158,2.7232,8169.48,0.3268,road
+146,6,nearest,Peak,Road + Waterbus,13.6158,2.7232,8169.48,0.3268,road
+146,6,nearest,Peak,Full Multimodal,13.6158,2.7232,8169.48,0.3268,road
 146,1,centralized,Off-Peak,Central Road Only,7.7599,3.88,11639.89,0.4656,road
 146,1,centralized,Off-Peak,Central Road + Metro,7.7599,3.88,11639.89,0.4656,road
 146,1,centralized,Off-Peak,Central Road + Waterbus,7.7599,3.88,11639.89,0.4656,road
@@ -2175,14 +2175,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 147,1,centralized,Peak,Central Road + Metro,18.74,3.748,11243.99,0.4498,road
 147,1,centralized,Peak,Central Road + Waterbus,18.74,3.748,11243.99,0.4498,road
 147,1,centralized,Peak,Central Full Multimodal,18.74,3.748,11243.99,0.4498,road
-148,4,nearest,Off-Peak,Road Only,0.0876,0.0438,131.37,0.0053,road
-148,4,nearest,Off-Peak,Road + Metro,0.0876,0.0438,131.37,0.0053,road
-148,4,nearest,Off-Peak,Road + Waterbus,0.0876,0.0438,131.37,0.0053,road
-148,4,nearest,Off-Peak,Full Multimodal,0.0876,0.0438,131.37,0.0053,road
-148,4,nearest,Peak,Road Only,0.219,0.0438,131.37,0.0053,road
-148,4,nearest,Peak,Road + Metro,0.219,0.0438,131.37,0.0053,road
-148,4,nearest,Peak,Road + Waterbus,0.219,0.0438,131.37,0.0053,road
-148,4,nearest,Peak,Full Multimodal,0.219,0.0438,131.37,0.0053,road
+148,6,nearest,Off-Peak,Road Only,1.5222,0.7611,2283.25,0.0913,road
+148,6,nearest,Off-Peak,Road + Metro,1.5222,0.7611,2283.25,0.0913,road
+148,6,nearest,Off-Peak,Road + Waterbus,1.5222,0.7611,2283.25,0.0913,road
+148,6,nearest,Off-Peak,Full Multimodal,1.5222,0.7611,2283.25,0.0913,road
+148,6,nearest,Peak,Road Only,3.8054,0.7611,2283.25,0.0913,road
+148,6,nearest,Peak,Road + Metro,3.8054,0.7611,2283.25,0.0913,road
+148,6,nearest,Peak,Road + Waterbus,3.8054,0.7611,2283.25,0.0913,road
+148,6,nearest,Peak,Full Multimodal,3.8054,0.7611,2283.25,0.0913,road
 148,1,centralized,Off-Peak,Central Road Only,6.4823,3.2411,9723.43,0.3889,road
 148,1,centralized,Off-Peak,Central Road + Metro,6.4823,3.2411,9723.43,0.3889,road
 148,1,centralized,Off-Peak,Central Road + Waterbus,6.4823,3.2411,9723.43,0.3889,road
@@ -2215,14 +2215,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 150,1,centralized,Peak,Central Road + Metro,18.74,3.748,11243.99,0.4498,road
 150,1,centralized,Peak,Central Road + Waterbus,18.74,3.748,11243.99,0.4498,road
 150,1,centralized,Peak,Central Full Multimodal,18.74,3.748,11243.99,0.4498,road
-151,4,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
-151,4,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
-151,4,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
-151,4,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
-151,4,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
-151,4,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
-151,4,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
-151,4,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
+151,5,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
+151,5,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
+151,5,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
+151,5,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
+151,5,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
+151,5,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
+151,5,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
+151,5,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
 151,1,centralized,Off-Peak,Central Road Only,7.496,3.748,11243.99,0.4498,road
 151,1,centralized,Off-Peak,Central Road + Metro,7.496,3.748,11243.99,0.4498,road
 151,1,centralized,Off-Peak,Central Road + Waterbus,7.496,3.748,11243.99,0.4498,road
@@ -2391,14 +2391,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 165,1,centralized,Peak,Central Road + Metro,13.6219,3.3528,19338.71,0.2088,metro+road+transfer
 165,1,centralized,Peak,Central Road + Waterbus,16.4247,3.2849,9854.8,0.3942,road
 165,1,centralized,Peak,Central Full Multimodal,13.6219,3.3528,19338.71,0.2088,metro+road+transfer
-166,2,nearest,Off-Peak,Road Only,4.3451,2.1725,6517.64,0.2607,road
-166,2,nearest,Off-Peak,Road + Metro,4.3451,2.1725,6517.64,0.2607,road
-166,2,nearest,Off-Peak,Road + Waterbus,4.3451,2.1725,6517.64,0.2607,road
-166,2,nearest,Off-Peak,Full Multimodal,4.3451,2.1725,6517.64,0.2607,road
-166,2,nearest,Peak,Road Only,10.8627,2.1725,6517.64,0.2607,road
-166,2,nearest,Peak,Road + Metro,10.8627,2.1725,6517.64,0.2607,road
-166,2,nearest,Peak,Road + Waterbus,10.8627,2.1725,6517.64,0.2607,road
-166,2,nearest,Peak,Full Multimodal,10.8627,2.1725,6517.64,0.2607,road
+166,6,nearest,Off-Peak,Road Only,0.8903,0.4451,1335.4,0.0534,road
+166,6,nearest,Off-Peak,Road + Metro,0.8903,0.4451,1335.4,0.0534,road
+166,6,nearest,Off-Peak,Road + Waterbus,0.8903,0.4451,1335.4,0.0534,road
+166,6,nearest,Off-Peak,Full Multimodal,0.8903,0.4451,1335.4,0.0534,road
+166,6,nearest,Peak,Road Only,2.2257,0.4451,1335.4,0.0534,road
+166,6,nearest,Peak,Road + Metro,2.2257,0.4451,1335.4,0.0534,road
+166,6,nearest,Peak,Road + Waterbus,2.2257,0.4451,1335.4,0.0534,road
+166,6,nearest,Peak,Full Multimodal,2.2257,0.4451,1335.4,0.0534,road
 166,1,centralized,Off-Peak,Central Road Only,6.0659,3.033,9098.86,0.364,road
 166,1,centralized,Off-Peak,Central Road + Metro,6.0659,3.033,9098.86,0.364,road
 166,1,centralized,Off-Peak,Central Road + Waterbus,6.0659,3.033,9098.86,0.364,road
@@ -2487,14 +2487,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 172,1,centralized,Peak,Central Road + Metro,18.74,3.748,11243.99,0.4498,road
 172,1,centralized,Peak,Central Road + Waterbus,18.74,3.748,11243.99,0.4498,road
 172,1,centralized,Peak,Central Full Multimodal,18.74,3.748,11243.99,0.4498,road
-173,4,nearest,Off-Peak,Road Only,6.0926,3.0463,9138.97,0.3656,road
-173,4,nearest,Off-Peak,Road + Metro,6.0926,3.0463,9138.97,0.3656,road
-173,4,nearest,Off-Peak,Road + Waterbus,6.0926,3.0463,9138.97,0.3656,road
-173,4,nearest,Off-Peak,Full Multimodal,6.0926,3.0463,9138.97,0.3656,road
-173,4,nearest,Peak,Road Only,15.2316,3.0463,9138.97,0.3656,road
-173,4,nearest,Peak,Road + Metro,15.2316,3.0463,9138.97,0.3656,road
-173,4,nearest,Peak,Road + Waterbus,15.2316,3.0463,9138.97,0.3656,road
-173,4,nearest,Peak,Full Multimodal,15.2316,3.0463,9138.97,0.3656,road
+173,6,nearest,Off-Peak,Road Only,4.8597,2.4298,7289.5,0.2916,road
+173,6,nearest,Off-Peak,Road + Metro,4.8597,2.4298,7289.5,0.2916,road
+173,6,nearest,Off-Peak,Road + Waterbus,4.8597,2.4298,7289.5,0.2916,road
+173,6,nearest,Off-Peak,Full Multimodal,4.8597,2.4298,7289.5,0.2916,road
+173,6,nearest,Peak,Road Only,12.1492,2.4298,7289.5,0.2916,road
+173,6,nearest,Peak,Road + Metro,12.1492,2.4298,7289.5,0.2916,road
+173,6,nearest,Peak,Road + Waterbus,12.1492,2.4298,7289.5,0.2916,road
+173,6,nearest,Peak,Full Multimodal,12.1492,2.4298,7289.5,0.2916,road
 173,1,centralized,Off-Peak,Central Road Only,7.1733,3.5866,10759.91,0.4304,road
 173,1,centralized,Off-Peak,Central Road + Metro,7.1733,3.5866,10759.91,0.4304,road
 173,1,centralized,Off-Peak,Central Road + Waterbus,7.1733,3.5866,10759.91,0.4304,road
@@ -2879,14 +2879,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 202,1,centralized,Peak,Central Road + Metro,17.9336,3.5867,10760.16,0.4304,road
 202,1,centralized,Peak,Central Road + Waterbus,17.9336,3.5867,10760.16,0.4304,road
 202,1,centralized,Peak,Central Full Multimodal,17.9336,3.5867,10760.16,0.4304,road
-203,4,nearest,Off-Peak,Road Only,6.0928,3.0464,9139.22,0.3656,road
-203,4,nearest,Off-Peak,Road + Metro,6.0928,3.0464,9139.22,0.3656,road
-203,4,nearest,Off-Peak,Road + Waterbus,6.0928,3.0464,9139.22,0.3656,road
-203,4,nearest,Off-Peak,Full Multimodal,6.0928,3.0464,9139.22,0.3656,road
-203,4,nearest,Peak,Road Only,15.232,3.0464,9139.22,0.3656,road
-203,4,nearest,Peak,Road + Metro,15.232,3.0464,9139.22,0.3656,road
-203,4,nearest,Peak,Road + Waterbus,15.232,3.0464,9139.22,0.3656,road
-203,4,nearest,Peak,Full Multimodal,15.232,3.0464,9139.22,0.3656,road
+203,6,nearest,Off-Peak,Road Only,4.8598,2.4299,7289.75,0.2916,road
+203,6,nearest,Off-Peak,Road + Metro,4.8598,2.4299,7289.75,0.2916,road
+203,6,nearest,Off-Peak,Road + Waterbus,4.8598,2.4299,7289.75,0.2916,road
+203,6,nearest,Off-Peak,Full Multimodal,4.8598,2.4299,7289.75,0.2916,road
+203,6,nearest,Peak,Road Only,12.1496,2.4299,7289.75,0.2916,road
+203,6,nearest,Peak,Road + Metro,12.1496,2.4299,7289.75,0.2916,road
+203,6,nearest,Peak,Road + Waterbus,12.1496,2.4299,7289.75,0.2916,road
+203,6,nearest,Peak,Full Multimodal,12.1496,2.4299,7289.75,0.2916,road
 203,1,centralized,Off-Peak,Central Road Only,7.1734,3.5867,10760.16,0.4304,road
 203,1,centralized,Off-Peak,Central Road + Metro,7.1734,3.5867,10760.16,0.4304,road
 203,1,centralized,Off-Peak,Central Road + Waterbus,7.1734,3.5867,10760.16,0.4304,road
@@ -2895,14 +2895,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 203,1,centralized,Peak,Central Road + Metro,17.9336,3.5867,10760.16,0.4304,road
 203,1,centralized,Peak,Central Road + Waterbus,17.9336,3.5867,10760.16,0.4304,road
 203,1,centralized,Peak,Central Full Multimodal,17.9336,3.5867,10760.16,0.4304,road
-204,4,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
-204,4,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
-204,4,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
-204,4,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
-204,4,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
-204,4,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
-204,4,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
-204,4,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
+204,5,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
+204,5,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
+204,5,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
+204,5,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
+204,5,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
+204,5,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
+204,5,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
+204,5,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
 204,1,centralized,Off-Peak,Central Road Only,7.496,3.748,11243.99,0.4498,road
 204,1,centralized,Off-Peak,Central Road + Metro,7.496,3.748,11243.99,0.4498,road
 204,1,centralized,Off-Peak,Central Road + Waterbus,7.496,3.748,11243.99,0.4498,road
@@ -2919,14 +2919,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 205,1,centralized,Peak,Central Road + Metro,13.6219,3.3528,19338.71,0.2088,metro+road+transfer
 205,1,centralized,Peak,Central Road + Waterbus,16.4247,3.2849,9854.8,0.3942,road
 205,1,centralized,Peak,Central Full Multimodal,13.6219,3.3528,19338.71,0.2088,metro+road+transfer
-206,4,nearest,Off-Peak,Road Only,6.6793,3.3397,10018.95,0.4008,road
-206,4,nearest,Off-Peak,Road + Metro,6.6793,3.3397,10018.95,0.4008,road
-206,4,nearest,Off-Peak,Road + Waterbus,6.6793,3.3397,10018.95,0.4008,road
-206,4,nearest,Off-Peak,Full Multimodal,6.6793,3.3397,10018.95,0.4008,road
-206,4,nearest,Peak,Road Only,16.6983,3.3397,10018.95,0.4008,road
-206,4,nearest,Peak,Road + Metro,16.6983,3.3397,10018.95,0.4008,road
-206,4,nearest,Peak,Road + Waterbus,16.6983,3.3397,10018.95,0.4008,road
-206,4,nearest,Peak,Full Multimodal,16.6983,3.3397,10018.95,0.4008,road
+206,6,nearest,Off-Peak,Road Only,5.4463,2.7232,8169.48,0.3268,road
+206,6,nearest,Off-Peak,Road + Metro,5.4463,2.7232,8169.48,0.3268,road
+206,6,nearest,Off-Peak,Road + Waterbus,5.4463,2.7232,8169.48,0.3268,road
+206,6,nearest,Off-Peak,Full Multimodal,5.4463,2.7232,8169.48,0.3268,road
+206,6,nearest,Peak,Road Only,13.6158,2.7232,8169.48,0.3268,road
+206,6,nearest,Peak,Road + Metro,13.6158,2.7232,8169.48,0.3268,road
+206,6,nearest,Peak,Road + Waterbus,13.6158,2.7232,8169.48,0.3268,road
+206,6,nearest,Peak,Full Multimodal,13.6158,2.7232,8169.48,0.3268,road
 206,1,centralized,Off-Peak,Central Road Only,7.7599,3.88,11639.89,0.4656,road
 206,1,centralized,Off-Peak,Central Road + Metro,7.7599,3.88,11639.89,0.4656,road
 206,1,centralized,Off-Peak,Central Road + Waterbus,7.7599,3.88,11639.89,0.4656,road
@@ -3111,14 +3111,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 226,1,centralized,Peak,Central Road + Metro,13.6219,3.3528,19338.71,0.2088,metro+road+transfer
 226,1,centralized,Peak,Central Road + Waterbus,16.4247,3.2849,9854.8,0.3942,road
 226,1,centralized,Peak,Central Full Multimodal,13.6219,3.3528,19338.71,0.2088,metro+road+transfer
-227,11,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
-227,11,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
-227,11,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
-227,11,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
-227,11,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
-227,11,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
-227,11,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
-227,11,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
+227,5,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
+227,5,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
+227,5,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
+227,5,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
+227,5,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
+227,5,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
+227,5,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
+227,5,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
 227,1,centralized,Off-Peak,Central Road Only,7.496,3.748,11243.99,0.4498,road
 227,1,centralized,Off-Peak,Central Road + Metro,7.496,3.748,11243.99,0.4498,road
 227,1,centralized,Off-Peak,Central Road + Waterbus,7.496,3.748,11243.99,0.4498,road
@@ -3439,14 +3439,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 266,1,centralized,Peak,Central Road + Metro,13.6219,3.3528,19338.71,0.2088,metro+road+transfer
 266,1,centralized,Peak,Central Road + Waterbus,16.4247,3.2849,9854.8,0.3942,road
 266,1,centralized,Peak,Central Full Multimodal,13.6219,3.3528,19338.71,0.2088,metro+road+transfer
-267,11,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
-267,11,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
-267,11,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
-267,11,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
-267,11,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
-267,11,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
-267,11,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
-267,11,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
+267,5,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
+267,5,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
+267,5,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
+267,5,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
+267,5,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
+267,5,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
+267,5,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
+267,5,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
 267,1,centralized,Off-Peak,Central Road Only,7.496,3.748,11243.99,0.4498,road
 267,1,centralized,Off-Peak,Central Road + Metro,7.496,3.748,11243.99,0.4498,road
 267,1,centralized,Off-Peak,Central Road + Waterbus,7.496,3.748,11243.99,0.4498,road
@@ -3463,14 +3463,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 268,1,centralized,Peak,Central Road + Metro,13.6219,3.3528,19338.71,0.2088,metro+road+transfer
 268,1,centralized,Peak,Central Road + Waterbus,16.4247,3.2849,9854.8,0.3942,road
 268,1,centralized,Peak,Central Full Multimodal,13.6219,3.3528,19338.71,0.2088,metro+road+transfer
-269,11,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
-269,11,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
-269,11,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
-269,11,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
-269,11,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
-269,11,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
-269,11,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
-269,11,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
+269,5,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
+269,5,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
+269,5,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
+269,5,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
+269,5,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
+269,5,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
+269,5,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
+269,5,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
 269,1,centralized,Off-Peak,Central Road Only,7.496,3.748,11243.99,0.4498,road
 269,1,centralized,Off-Peak,Central Road + Metro,7.496,3.748,11243.99,0.4498,road
 269,1,centralized,Off-Peak,Central Road + Waterbus,7.496,3.748,11243.99,0.4498,road
@@ -3551,14 +3551,14 @@ order_id,hub_id,hub_strategy,traffic_condition,scenario,time,distance,cost,co2,m
 278,1,centralized,Peak,Central Road + Metro,13.6219,3.3528,19338.71,0.2088,metro+road+transfer
 278,1,centralized,Peak,Central Road + Waterbus,16.4247,3.2849,9854.8,0.3942,road
 278,1,centralized,Peak,Central Full Multimodal,13.6219,3.3528,19338.71,0.2088,metro+road+transfer
-279,11,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
-279,11,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
-279,11,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
-279,11,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
-279,11,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
-279,11,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
-279,11,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
-279,11,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
+279,5,nearest,Off-Peak,Road Only,6.4154,3.2077,9623.05,0.3849,road
+279,5,nearest,Off-Peak,Road + Metro,6.4154,3.2077,9623.05,0.3849,road
+279,5,nearest,Off-Peak,Road + Waterbus,6.4154,3.2077,9623.05,0.3849,road
+279,5,nearest,Off-Peak,Full Multimodal,6.4154,3.2077,9623.05,0.3849,road
+279,5,nearest,Peak,Road Only,16.0384,3.2077,9623.05,0.3849,road
+279,5,nearest,Peak,Road + Metro,16.0384,3.2077,9623.05,0.3849,road
+279,5,nearest,Peak,Road + Waterbus,16.0384,3.2077,9623.05,0.3849,road
+279,5,nearest,Peak,Full Multimodal,16.0384,3.2077,9623.05,0.3849,road
 279,1,centralized,Off-Peak,Central Road Only,7.496,3.748,11243.99,0.4498,road
 279,1,centralized,Off-Peak,Central Road + Metro,7.496,3.748,11243.99,0.4498,road
 279,1,centralized,Off-Peak,Central Road + Waterbus,7.496,3.748,11243.99,0.4498,road
