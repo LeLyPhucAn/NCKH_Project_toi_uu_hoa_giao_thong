@@ -321,17 +321,23 @@ def build_graph(
     """Xây dựng Đồ thị Đa phương thức sử dụng OSMnx lấy riêng bản đồ Quận 1."""
     print("[2/7] Fetching District 1 map via OSMnx & Building Multimodal Graph...")
 
-    # 1. Tải bản đồ giao thông đường bộ Quận 1 từ OpenStreetMap
-    place_name = "District 1, Ho Chi Minh City, Vietnam"
+    # 1. Tải bản đồ giao thông đường bộ từ OpenStreetMap (Sử dụng Bounding Box)
+    # Lấy tọa độ Min/Max của TẤT CẢ các điểm (Metro, Waterbus, Hub, Orders)
+    all_lats = pd.concat([metro_df["lat"], waterbus_df["lat"], hubs_df["lat"], orders_df["lat"]])
+    all_lons = pd.concat([metro_df["lon"], waterbus_df["lon"], hubs_df["lon"], orders_df["lon"]])
+    
+    # Tính Bounding Box (Mở rộng thêm 0.01 độ ~ 1.1km mỗi hướng để làm vùng đệm)
+    min_lat, max_lat = all_lats.min() - 0.01, all_lats.max() + 0.01
+    min_lon, max_lon = all_lons.min() - 0.01, all_lons.max() + 0.01
+    bbox = (min_lon, min_lat, max_lon, max_lat) # Format OSMnx v2.x: (left, bottom, right, top)
+
+    print(f"  -> Bounding Box: Lats [{min_lat:.4f}, {max_lat:.4f}], Lons [{min_lon:.4f}, {max_lon:.4f}]")
     try:
-        G = ox.graph_from_place(place_name, network_type="drive")
-        print(f"  -> Successfully loaded District 1 road map ({len(G)} nodes).")
-    except Exception as e:
-        print(f"  [!] Fallback to bounding box fetch for District 1: {e}")
-        all_lats = pd.concat([metro_df["lat"], waterbus_df["lat"], hubs_df["lat"], orders_df["lat"]])
-        all_lons = pd.concat([metro_df["lon"], waterbus_df["lon"], hubs_df["lon"], orders_df["lon"]])
-        bbox = (all_lons.min() - 0.015, all_lats.min() - 0.015, all_lons.max() + 0.015, all_lats.max() + 0.015)
         G = ox.graph_from_bbox(bbox=bbox, network_type="drive")
+        print(f"  -> Successfully loaded Expanded Road Map ({len(G)} nodes).")
+    except Exception as e:
+        print(f"  [!] Lỗi khi tải bản đồ OSMnx: {e}")
+        return None
 
     # Gán thuộc tính mặc định cho đường bộ
     for u, v, key, data in G.edges(keys=True, data=True):
