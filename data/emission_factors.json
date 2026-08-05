@@ -1,0 +1,21 @@
+{
+  "reference_source_1": "IPCC (Intergovernmental Panel on Climate Change) Guidelines for National Greenhouse Gas Inventories",
+  "reference_source_2": "EEA (European Environment Agency) Emission Inventory Guidebook",
+  "factors": {
+    "motorbike_gasoline": {
+      "value": 53.4,
+      "unit": "g CO2 / km",
+      "description": "Lượng phát thải trung bình của một xe máy 4 thì, dung tích dưới 150cc chạy xăng trong điều kiện đô thị."
+    },
+    "metro_electric": {
+      "value": 14.2,
+      "unit": "g CO2 / (passenger * km)",
+      "description": "Hệ số quy đổi phát thải từ điện năng tiêu thụ cho tàu điện ngầm đô thị, chia cho mỗi hành khách."
+    },
+    "waterbus_diesel": {
+      "value": 24.5,
+      "unit": "g CO2 / (passenger * km)",
+      "description": "Lượng phát thải trung bình của phà/tàu thủy nội đô sử dụng động cơ diesel."
+    }
+  }
+}

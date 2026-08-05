@@ -1,8 +1,8 @@
 import pandas as pd 
-metro = pd.read_csv("metro.csv")
-waterbus = pd.read_csv("waterbus.csv")
-hub = pd.read_csv("hub_candidates.csv")
-orders = pd.read_csv("orders.csv")
+metro = pd.read_csv("data/metro.csv")
+waterbus = pd.read_csv("data/waterbus.csv")
+hub = pd.read_csv("data/hub_candidates.csv")
+orders = pd.read_csv("data/orders.csv")
 print(metro.head())
 # Tọa độ trung tâm của bản đồ (ví dụ: trung tâm TP.HCM)
 import folium
@@ -39,4 +39,3 @@ for _, row in orders.iterrows():
     ).add_to(m)
 # Lưu bản đồ vào file HTML
 m.save("multimodal_map_v1.html")
-print("Map saved successfully!")
