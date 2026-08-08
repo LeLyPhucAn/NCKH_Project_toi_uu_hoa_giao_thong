@@ -1,17 +1,17 @@
 hub_strategy,traffic_condition,scenario,avg_time_min,total_co2_kg,avg_cost_vnd,multimodal_used_cnt,time_improvement_pct,co2_improvement_pct,cost_improvement_pct
-nearest,Off-Peak,Full Multimodal,3.44,36.16,5165.26,0,0.0,0.0,0.0
-nearest,Off-Peak,Road + Metro,3.44,36.16,5165.26,0,0.0,0.0,0.0
-nearest,Off-Peak,Road + Waterbus,3.44,36.16,5165.26,0,0.0,0.0,0.0
-nearest,Off-Peak,Road Only,3.44,36.16,5165.26,0,0.0,0.0,0.0
-nearest,Peak,Full Multimodal,8.61,36.16,5165.26,0,0.0,0.0,0.0
-nearest,Peak,Road + Metro,8.61,36.16,5165.26,0,0.0,0.0,0.0
-nearest,Peak,Road + Waterbus,8.61,36.16,5165.26,0,0.0,0.0,0.0
-nearest,Peak,Road Only,8.61,36.16,5165.26,0,0.0,0.0,0.0
-centralized,Off-Peak,Central Full Multimodal,4.01,70.05,6018.09,0,0.0,0.0,0.0
-centralized,Off-Peak,Central Road + Metro,4.01,70.05,6018.09,0,0.0,0.0,0.0
-centralized,Off-Peak,Central Road + Waterbus,4.01,70.05,6018.09,0,0.0,0.0,0.0
-centralized,Off-Peak,Central Road Only,4.01,70.05,6018.09,0,0.0,0.0,0.0
-centralized,Peak,Central Full Multimodal,10.03,70.05,6018.09,0,0.0,0.0,0.0
-centralized,Peak,Central Road + Metro,10.03,70.05,6018.09,0,0.0,0.0,0.0
-centralized,Peak,Central Road + Waterbus,10.03,70.05,6018.09,0,0.0,0.0,0.0
-centralized,Peak,Central Road Only,10.03,70.05,6018.09,0,0.0,0.0,0.0
+nearest,Off-Peak,Full Multimodal,5.66,59.75,8486.71,0,0.0,0.0,0.0
+nearest,Off-Peak,Road + Metro,5.66,59.75,8486.71,0,0.0,0.0,0.0
+nearest,Off-Peak,Road + Waterbus,5.66,59.75,8486.71,0,0.0,0.0,0.0
+nearest,Off-Peak,Road Only,5.66,59.75,8486.71,0,0.0,0.0,0.0
+nearest,Peak,Full Multimodal,14.03,57.74,9243.86,13,0.8,3.4,-8.9
+nearest,Peak,Road + Metro,14.03,57.74,9243.86,13,0.8,3.4,-8.9
+nearest,Peak,Road + Waterbus,14.14,59.75,8486.71,0,0.0,0.0,0.0
+nearest,Peak,Road Only,14.14,59.75,8486.71,0,0.0,0.0,0.0
+centralized,Off-Peak,Central Full Multimodal,5.66,59.75,8486.71,0,0.0,0.0,0.0
+centralized,Off-Peak,Central Road + Metro,5.66,59.75,8486.71,0,0.0,0.0,0.0
+centralized,Off-Peak,Central Road + Waterbus,5.66,59.75,8486.71,0,0.0,0.0,0.0
+centralized,Off-Peak,Central Road Only,5.66,59.75,8486.71,0,0.0,0.0,0.0
+centralized,Peak,Central Full Multimodal,14.03,57.74,9243.86,13,0.8,3.4,-8.9
+centralized,Peak,Central Road + Metro,14.03,57.74,9243.86,13,0.8,3.4,-8.9
+centralized,Peak,Central Road + Waterbus,14.14,59.75,8486.71,0,0.0,0.0,0.0
+centralized,Peak,Central Road Only,14.14,59.75,8486.71,0,0.0,0.0,0.0

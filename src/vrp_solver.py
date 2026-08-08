@@ -17,7 +17,9 @@ def haversine_km(lat1, lon1, lat2, lon2):
     return R * 2 * np.arcsin(np.sqrt(a))
 
 class VRPSolver:
-    def __init__(self, base_dir=r"d:\NCKH_Project_toi_uu_hoa_giao_thong"):
+    def __init__(self, base_dir=None):
+        if base_dir is None:
+            base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
         self.base_dir = base_dir
         self.model_path = os.path.join(base_dir, "src", "traffic_model.pkl")
         self.features_path = os.path.join(base_dir, "src", "traffic_model_features.pkl")

@@ -1,3 +1,4 @@
+import os
 import math
 import pickle
 import re
@@ -6,7 +7,7 @@ import networkx as nx
 import osmnx as ox
 import pandas as pd
 
-ox.settings.log_console = True
+ox.settings.log_console = False
 
 
 def calculate_distance(lat1, lon1, lat2, lon2):
@@ -316,9 +317,13 @@ def build_graph(
     waterbus_df,
     hubs_df,
     orders_df,
-    save_path="results/multimodal_graph.pkl",
+    save_path=None,
 ):
     """Xây dựng Đồ thị Đa phương thức sử dụng OSMnx lấy riêng bản đồ Quận 1."""
+    if save_path is None:
+        base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        save_path = os.path.join(base_dir, "results", "multimodal_graph.pkl")
+    os.makedirs(os.path.dirname(save_path), exist_ok=True)
     print("[2/7] Fetching District 1 map via OSMnx & Building Multimodal Graph...")
 
     # 1. Tải bản đồ giao thông đường bộ từ OpenStreetMap (Sử dụng Bounding Box)

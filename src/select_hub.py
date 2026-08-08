@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 import numpy as np
 import itertools
@@ -68,12 +69,18 @@ def select_hub(hubs_df, orders_df, num_hubs=3):
     assigned_hub_ids = [hubs_df.iloc[best_combination[i]]['hub_id'] for i in assigned_hub_indices_in_combo]
     
     # 5. Lưu kết quả gán Hub vào orders_df
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    data_dir = os.path.join(base_dir, "data")
+    results_dir = os.path.join(base_dir, "results")
+    os.makedirs(data_dir, exist_ok=True)
+    os.makedirs(results_dir, exist_ok=True)
+
     orders_df['assigned_hub_id'] = assigned_hub_ids
-    orders_df.to_csv("data/orders.csv", index=False)
+    orders_df.to_csv(os.path.join(data_dir, "orders.csv"), index=False)
 
     # 6. In và lưu kết quả danh sách Hub được chọn
     selected_hubs = hubs_df.iloc[list(best_combination)].copy()
-    selected_hubs.to_csv("results/selected_hubs.csv", index=False)
+    selected_hubs.to_csv(os.path.join(results_dir, "selected_hubs.csv"), index=False)
     
     print(f"  -> Global K-Medoids Optimization Finished!")
     print(f"  -> Total distance to nearest hubs: {min_global_dist:.2f} km")

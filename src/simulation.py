@@ -7,9 +7,13 @@ from datetime import datetime, timedelta
 def simulation():
     print("[6/7] Running Systems-Oriented Event Simulation...")
 
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    results_dir = os.path.join(base_dir, "results")
+    os.makedirs(results_dir, exist_ok=True)
+
     # === FIX: Đọc kết quả thực từ routing thay vì hardcode ===
-    routing_path = "results/routing_results.csv"
-    improvement_path = "results/improvement_results.csv"
+    routing_path = os.path.join(results_dir, "routing_results.csv")
+    improvement_path = os.path.join(results_dir, "improvement_results.csv")
 
     try:
         df = pd.read_csv(routing_path)
@@ -133,7 +137,8 @@ def simulation():
     lines.append("                     END OF SIMULATION LOG")
     lines.append("=" * 90)
 
-    with open("results/simulation_log.txt", "w", encoding="utf-8") as f:
+    log_path = os.path.join(results_dir, "simulation_log.txt")
+    with open(log_path, "w", encoding="utf-8") as f:
         for line in lines:
             f.write(line + "\n")
     print("  -> System simulation log saved with real data from routing results.")

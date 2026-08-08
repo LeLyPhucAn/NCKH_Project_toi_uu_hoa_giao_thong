@@ -10,6 +10,7 @@ Các kịch bản so sánh:
   3. Road + Waterbus: Mega-Hub → (xe máy đến bến tàu) → (Waterbus) → (xe máy từ bến đến KH)
   4. Full Multimodal: Mega-Hub → (Chọn đường tối ưu nhất kết hợp tất cả phương tiện)
 """
+import os
 import networkx as nx
 import osmnx as ox
 import pandas as pd
@@ -257,7 +258,10 @@ def routing(G, orders_df, hubs_df):
     df_res = pd.DataFrame(results)
     print(f"  -> Skipped: {skipped} orders (same node as mega-hub)")
     if not df_res.empty:
-        df_res.to_csv("results/routing_results.csv", index=False)
+        base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+        results_dir = os.path.join(base_dir, "results")
+        os.makedirs(results_dir, exist_ok=True)
+        df_res.to_csv(os.path.join(results_dir, "routing_results.csv"), index=False)
         nearest_cnt = df_res[df_res['hub_strategy'] == 'nearest']['order_id'].nunique()
         central_cnt = df_res[df_res['hub_strategy'] == 'centralized']['order_id'].nunique()
         print(f"  -> Routing done: {nearest_cnt} orders (nearest), {central_cnt} orders (centralized)")

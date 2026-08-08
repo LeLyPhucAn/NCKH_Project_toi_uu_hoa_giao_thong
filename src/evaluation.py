@@ -1,3 +1,4 @@
+import os
 import pandas as pd
 
 
@@ -71,13 +72,17 @@ def evaluation(routing_results_df):
     all_summary = pd.concat([v['summary'].assign(hub_strategy=k) for k, v in results_out.items()], ignore_index=True)
     all_improve = pd.concat([v['improvement'] for v in results_out.values()], ignore_index=True)
 
-    all_summary.to_csv("results/summary_results.csv", index=False)
-    all_improve.to_csv("results/improvement_results.csv", index=False)
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    results_dir = os.path.join(base_dir, "results")
+    os.makedirs(results_dir, exist_ok=True)
+
+    all_summary.to_csv(os.path.join(results_dir, "summary_results.csv"), index=False)
+    all_improve.to_csv(os.path.join(results_dir, "improvement_results.csv"), index=False)
     print("\n  -> KPIs saved to results/summary_results.csv")
     print("  -> Improvement table saved to results/improvement_results.csv")
 
     try:
-        with pd.ExcelWriter("results/summary_results.xlsx", engine="openpyxl") as writer:
+        with pd.ExcelWriter(os.path.join(results_dir, "summary_results.xlsx"), engine="openpyxl") as writer:
             for strategy, data in results_out.items():
                 sheet = strategy[:28]  # Excel giới hạn 31 ký tự sheet name
                 data['summary'].to_excel(writer, index=False, sheet_name=f"KPI_{sheet}")

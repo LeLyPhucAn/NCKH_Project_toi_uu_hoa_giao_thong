@@ -15,7 +15,9 @@ from simulation import simulation
 
 
 def main():
-    os.makedirs("results", exist_ok=True)
+    base_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+    results_dir = os.path.join(base_dir, "results")
+    os.makedirs(results_dir, exist_ok=True)
 
     # 1. Nạp và làm sạch dữ liệu
     metro, metro_edges, waterbus, hubs, orders = load_data()
@@ -24,7 +26,7 @@ def main():
         return
 
     # 2. Xây dựng đồ thị đa phương thức (OSMnx Bounding Box)
-    graph_path = "results/multimodal_graph.pkl"
+    graph_path = os.path.join(results_dir, "multimodal_graph.pkl")
     G = None
     if os.path.exists(graph_path):
         try:
@@ -42,7 +44,7 @@ def main():
     selected_hubs = select_hub(hubs, orders, num_hubs=3)
 
     # 4. Giải bài toán lộ trình VRP chặng cuối bằng Google OR-Tools kết hợp dự báo tốc độ AI
-    vrp = VRPSolver()
+    vrp = VRPSolver(base_dir=base_dir)
     
     # Kịch bản 1: Giờ bình thường, thời tiết nắng đẹp (Clear)
     print("\n" + "="*50)
@@ -63,6 +65,9 @@ def main():
     routing_results = routing(G, orders, selected_hubs)
     evaluation(routing_results)
     
+    # 6. Chạy mô phỏng hệ thống và xuất simulation_log.txt
+    simulation()
+
     print("\n[7/7] Pipeline Hoàn Thành!")
 
 

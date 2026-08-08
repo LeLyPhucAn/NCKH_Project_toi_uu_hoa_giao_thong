@@ -13,7 +13,7 @@ from sklearn.ensemble import RandomForestRegressor
 from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 import joblib
 
-BASE_DIR  = r"d:\NCKH_Project_toi_uu_hoa_giao_thong"
+BASE_DIR  = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 DATA_PATH = os.path.join(BASE_DIR, "data", "traffic_training_data.csv")
 MODEL_OUT = os.path.join(BASE_DIR, "src",  "traffic_model.pkl")
 
