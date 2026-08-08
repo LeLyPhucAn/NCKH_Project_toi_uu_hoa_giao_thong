@@ -1,57 +1,86 @@
 import pandas as pd
 import numpy as np
-from math import radians, sin, cos, sqrt, atan2
-
+import itertools
 
 def haversine_matrix(orders_coords, hubs_coords):
     """
     Tính ma trận khoảng cách Haversine (km) giữa tất cả cặp (order, hub).
-    Chính xác hơn Euclidean vì tính đến độ cong bề mặt Trái Đất.
-    Vectorized bằng numpy để đủ nhanh với 300 × 15 = 4500 cặp.
+    Vectorized bằng numpy để chạy nhanh.
     """
     R = 6371.0  # Bán kính Trái Đất (km)
 
     # Chuyển sang radian
     o_lat = np.radians(orders_coords[:, 0])[:, np.newaxis]   # (300, 1)
     o_lon = np.radians(orders_coords[:, 1])[:, np.newaxis]   # (300, 1)
-    h_lat = np.radians(hubs_coords[:, 0])[np.newaxis, :]     # (1, 15)
-    h_lon = np.radians(hubs_coords[:, 1])[np.newaxis, :]     # (1, 15)
+    h_lat = np.radians(hubs_coords[:, 0])[np.newaxis, :]     # (1, num_hubs)
+    h_lon = np.radians(hubs_coords[:, 1])[np.newaxis, :]     # (1, num_hubs)
 
     dlat = h_lat - o_lat
     dlon = h_lon - o_lon
 
     a = np.sin(dlat / 2) ** 2 + np.cos(o_lat) * np.cos(h_lat) * np.sin(dlon / 2) ** 2
     c = 2 * np.arctan2(np.sqrt(a), np.sqrt(1 - a))
-    return R * c  # ma trận (300, 15) km
+    return R * c  # ma trận (num_orders, num_hubs) km
 
 
-def select_hub(hubs_df, orders_df, num_hubs=5):
-    print("[3/7] Selecting Optimal Hubs (Greedy + Haversine)...")
+def select_hub(hubs_df, orders_df, num_hubs=3):
+    """
+    Thuật toán K-Medoids tối ưu hóa chọn Hub:
+    Tìm tập hợp K Hubs trong số các ứng viên sao cho tổng khoảng cách từ mỗi đơn hàng
+    đến Hub gần nhất được gán là NHỎ NHẤT.
+    Vì số lượng Hub ứng viên nhỏ (6 Hub), chúng ta sử dụng phương pháp tìm kiếm vét cạn (Brute-force)
+    để tìm ra nghiệm tối ưu toàn cục (Global Optimum), tránh bị kẹt ở nghiệm cục bộ như K-Means/K-Medoids thông thường.
+    """
+    print(f"[3/7] Selecting {num_hubs} Optimal Hubs using Global K-Medoids...")
+    
     hubs_coords = hubs_df[['lat', 'lon']].values
     orders_coords = orders_df[['lat', 'lon']].values
 
-    # FIX: Dùng khoảng cách Haversine thay vì Euclidean trên tọa độ lat/lon
-    dist_matrix = haversine_matrix(orders_coords, hubs_coords)
+    # 1. Tính ma trận khoảng cách Haversine giữa 300 orders và các Hubs
+    dist_matrix = haversine_matrix(orders_coords, hubs_coords) # shape: (300, num_candidates)
 
-    selected_indices = []
-    for _ in range(num_hubs):
-        best_hub = -1
-        min_total_dist = float('inf')
+    num_candidates = len(hubs_df)
+    if num_hubs > num_candidates:
+        num_hubs = num_candidates
 
-        for i in range(len(hubs_df)):
-            if i in selected_indices:
-                continue
-            temp_selected = selected_indices + [i]
-            # Mỗi đơn được phục vụ bởi hub gần nhất trong tập đã chọn
-            total_dist = np.sum(np.min(dist_matrix[:, temp_selected], axis=1))
-            if total_dist < min_total_dist:
-                min_total_dist, best_hub = total_dist, i
+    # 2. Tìm tất cả các tổ hợp chập K của các Hub ứng viên
+    candidates_indices = list(range(num_candidates))
+    combinations = list(itertools.combinations(candidates_indices, num_hubs))
 
-        selected_indices.append(best_hub)
-        chosen_name = hubs_df.iloc[best_hub]['name']
-        print(f"  -> Chọn Hub #{len(selected_indices)}: {chosen_name} (tổng khoảng cách giảm còn {min_total_dist:.2f} km)")
+    best_combination = None
+    min_global_dist = float('inf')
 
-    selected_hubs = hubs_df.iloc[selected_indices].copy()
+    # 3. Duyệt qua từng tổ hợp để tìm tổ hợp có tổng khoảng cách nhỏ nhất
+    for combo in combinations:
+        # Với mỗi đơn hàng, tìm khoảng cách đến Hub gần nhất trong tổ hợp đang xét
+        min_dists_for_combo = np.min(dist_matrix[:, combo], axis=1)
+        total_dist = np.sum(min_dists_for_combo)
+
+        if total_dist < min_global_dist:
+            min_global_dist = total_dist
+            best_combination = combo
+
+    # 4. Gán nhãn cụm (cluster) cho từng đơn hàng dựa trên Hub gần nhất được chọn
+    best_combo_dist_matrix = dist_matrix[:, best_combination]
+    assigned_hub_indices_in_combo = np.argmin(best_combo_dist_matrix, axis=1)
+    
+    # Chuyển index trong combo thành index thực tế của hubs_df
+    assigned_hub_ids = [hubs_df.iloc[best_combination[i]]['hub_id'] for i in assigned_hub_indices_in_combo]
+    
+    # 5. Lưu kết quả gán Hub vào orders_df
+    orders_df['assigned_hub_id'] = assigned_hub_ids
+    orders_df.to_csv("data/orders.csv", index=False)
+
+    # 6. In và lưu kết quả danh sách Hub được chọn
+    selected_hubs = hubs_df.iloc[list(best_combination)].copy()
     selected_hubs.to_csv("results/selected_hubs.csv", index=False)
-    print(f"  -> {num_hubs} Selected Hubs saved to results/selected_hubs.csv")
+    
+    print(f"  -> Global K-Medoids Optimization Finished!")
+    print(f"  -> Total distance to nearest hubs: {min_global_dist:.2f} km")
+    print(f"  -> Selected Hubs:")
+    for idx, row in selected_hubs.iterrows():
+        # Đếm số đơn hàng gán cho hub này
+        assigned_count = sum(1 for h_id in assigned_hub_ids if h_id == row['hub_id'])
+        print(f"     Hub {int(row['hub_id'])}: {row['name']} -> Phục vụ: {assigned_count} đơn hàng")
+        
     return selected_hubs

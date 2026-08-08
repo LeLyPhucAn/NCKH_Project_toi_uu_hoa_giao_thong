@@ -1,17 +1,17 @@
 traffic_condition,scenario,avg_time_min,total_distance_km,avg_distance_km,total_cost_vnd,avg_cost_vnd,total_co2_kg,avg_co2_kg,delivery_count,multimodal_used,hub_strategy
-Off-Peak,Full Multimodal,3.1,271.64,1.55,814907.19,4656.61,32.6,0.19,175,0,nearest
-Off-Peak,Road + Metro,3.1,271.64,1.55,814907.19,4656.61,32.6,0.19,175,0,nearest
-Off-Peak,Road + Waterbus,3.1,271.64,1.55,814907.19,4656.61,32.6,0.19,175,0,nearest
-Off-Peak,Road Only,3.1,271.64,1.55,814907.19,4656.61,32.6,0.19,175,0,nearest
-Peak,Full Multimodal,7.76,271.64,1.55,814907.19,4656.61,32.6,0.19,175,0,nearest
-Peak,Road + Metro,7.76,271.64,1.55,814907.19,4656.61,32.6,0.19,175,0,nearest
-Peak,Road + Waterbus,7.76,271.64,1.55,814907.19,4656.61,32.6,0.19,175,0,nearest
-Peak,Road Only,7.76,271.64,1.55,814907.19,4656.61,32.6,0.19,175,0,nearest
-Off-Peak,Central Full Multimodal,4.99,728.72,2.5,2186154.16,7486.83,87.44,0.3,292,0,centralized
-Off-Peak,Central Road + Metro,4.99,728.72,2.5,2186154.16,7486.83,87.44,0.3,292,0,centralized
-Off-Peak,Central Road + Waterbus,4.99,728.72,2.5,2186154.16,7486.83,87.44,0.3,292,0,centralized
-Off-Peak,Central Road Only,4.99,728.72,2.5,2186154.16,7486.83,87.44,0.3,292,0,centralized
-Peak,Central Full Multimodal,11.3,737.11,2.52,3352809.12,11482.22,64.65,0.22,292,123,centralized
-Peak,Central Road + Metro,11.3,737.11,2.52,3352809.12,11482.22,64.65,0.22,292,123,centralized
-Peak,Central Road + Waterbus,12.48,728.72,2.5,2186154.16,7486.83,87.44,0.3,292,0,centralized
-Peak,Central Road Only,12.48,728.72,2.5,2186154.16,7486.83,87.44,0.3,292,0,centralized
+Off-Peak,Full Multimodal,3.44,301.31,1.72,903920.67,5165.26,36.16,0.21,175,0,nearest
+Off-Peak,Road + Metro,3.44,301.31,1.72,903920.67,5165.26,36.16,0.21,175,0,nearest
+Off-Peak,Road + Waterbus,3.44,301.31,1.72,903920.67,5165.26,36.16,0.21,175,0,nearest
+Off-Peak,Road Only,3.44,301.31,1.72,903920.67,5165.26,36.16,0.21,175,0,nearest
+Peak,Full Multimodal,8.61,301.31,1.72,903920.67,5165.26,36.16,0.21,175,0,nearest
+Peak,Road + Metro,8.61,301.31,1.72,903920.67,5165.26,36.16,0.21,175,0,nearest
+Peak,Road + Waterbus,8.61,301.31,1.72,903920.67,5165.26,36.16,0.21,175,0,nearest
+Peak,Road Only,8.61,301.31,1.72,903920.67,5165.26,36.16,0.21,175,0,nearest
+Off-Peak,Central Full Multimodal,4.01,583.75,2.01,1751264.21,6018.09,70.05,0.24,291,0,centralized
+Off-Peak,Central Road + Metro,4.01,583.75,2.01,1751264.21,6018.09,70.05,0.24,291,0,centralized
+Off-Peak,Central Road + Waterbus,4.01,583.75,2.01,1751264.21,6018.09,70.05,0.24,291,0,centralized
+Off-Peak,Central Road Only,4.01,583.75,2.01,1751264.21,6018.09,70.05,0.24,291,0,centralized
+Peak,Central Full Multimodal,10.03,583.75,2.01,1751264.21,6018.09,70.05,0.24,291,0,centralized
+Peak,Central Road + Metro,10.03,583.75,2.01,1751264.21,6018.09,70.05,0.24,291,0,centralized
+Peak,Central Road + Waterbus,10.03,583.75,2.01,1751264.21,6018.09,70.05,0.24,291,0,centralized
+Peak,Central Road Only,10.03,583.75,2.01,1751264.21,6018.09,70.05,0.24,291,0,centralized
