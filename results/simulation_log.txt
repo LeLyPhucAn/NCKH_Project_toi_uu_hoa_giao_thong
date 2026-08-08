@@ -1,79 +1,53 @@
 ==========================================================================================
            MULTIMODAL TRANSPORTATION SIMULATION SYSTEM LOG
      Hệ thống Logistics Đa phương thức TP.HCM — Phân tích thực tế
-     Generated: 2026-07-30 21:30:52
+     Generated: 2026-08-08 20:10:03
 ==========================================================================================
 
 [SECTION 1: KPI TỔNG HỢP THỰC TẾ TỪ THUẬT TOÁN]
 ------------------------------------------------------------------------------------------
-  [Off-Peak] [Central Full Multimodal] Avg Time:   4.99 min | Avg Dist:  2.50 km | Avg CO2: 0.299 kg | Avg Cost:     7487 VND | Orders: 292
-  [Off-Peak] [Central Road + Metro] Avg Time:   4.99 min | Avg Dist:  2.50 km | Avg CO2: 0.299 kg | Avg Cost:     7487 VND | Orders: 292
-  [Off-Peak] [Central Road + Waterbus] Avg Time:   4.99 min | Avg Dist:  2.50 km | Avg CO2: 0.299 kg | Avg Cost:     7487 VND | Orders: 292
-  [Off-Peak] [Central Road Only   ] Avg Time:   4.99 min | Avg Dist:  2.50 km | Avg CO2: 0.299 kg | Avg Cost:     7487 VND | Orders: 292
-  [Off-Peak] [Full Multimodal     ] Avg Time:   3.10 min | Avg Dist:  1.55 km | Avg CO2: 0.186 kg | Avg Cost:     4657 VND | Orders: 175
-  [Off-Peak] [Road + Metro        ] Avg Time:   3.10 min | Avg Dist:  1.55 km | Avg CO2: 0.186 kg | Avg Cost:     4657 VND | Orders: 175
-  [Off-Peak] [Road + Waterbus     ] Avg Time:   3.10 min | Avg Dist:  1.55 km | Avg CO2: 0.186 kg | Avg Cost:     4657 VND | Orders: 175
-  [Off-Peak] [Road Only           ] Avg Time:   3.10 min | Avg Dist:  1.55 km | Avg CO2: 0.186 kg | Avg Cost:     4657 VND | Orders: 175
-  [Peak    ] [Central Full Multimodal] Avg Time:  11.30 min | Avg Dist:  2.52 km | Avg CO2: 0.221 kg | Avg Cost:    11482 VND | Orders: 292
-  [Peak    ] [Central Road + Metro] Avg Time:  11.30 min | Avg Dist:  2.52 km | Avg CO2: 0.221 kg | Avg Cost:    11482 VND | Orders: 292
-  [Peak    ] [Central Road + Waterbus] Avg Time:  12.48 min | Avg Dist:  2.50 km | Avg CO2: 0.299 kg | Avg Cost:     7487 VND | Orders: 292
-  [Peak    ] [Central Road Only   ] Avg Time:  12.48 min | Avg Dist:  2.50 km | Avg CO2: 0.299 kg | Avg Cost:     7487 VND | Orders: 292
-  [Peak    ] [Full Multimodal     ] Avg Time:   7.76 min | Avg Dist:  1.55 km | Avg CO2: 0.186 kg | Avg Cost:     4657 VND | Orders: 175
-  [Peak    ] [Road + Metro        ] Avg Time:   7.76 min | Avg Dist:  1.55 km | Avg CO2: 0.186 kg | Avg Cost:     4657 VND | Orders: 175
-  [Peak    ] [Road + Waterbus     ] Avg Time:   7.76 min | Avg Dist:  1.55 km | Avg CO2: 0.186 kg | Avg Cost:     4657 VND | Orders: 175
-  [Peak    ] [Road Only           ] Avg Time:   7.76 min | Avg Dist:  1.55 km | Avg CO2: 0.186 kg | Avg Cost:     4657 VND | Orders: 175
+  [Off-Peak] [Central Full Multimodal] Avg Time:   5.66 min | Avg Dist:  2.83 km | Avg CO2: 0.339 kg | Avg Cost:     8487 VND | Orders: 176
+  [Off-Peak] [Central Road + Metro] Avg Time:   5.66 min | Avg Dist:  2.83 km | Avg CO2: 0.339 kg | Avg Cost:     8487 VND | Orders: 176
+  [Off-Peak] [Central Road + Waterbus] Avg Time:   5.66 min | Avg Dist:  2.83 km | Avg CO2: 0.339 kg | Avg Cost:     8487 VND | Orders: 176
+  [Off-Peak] [Central Road Only   ] Avg Time:   5.66 min | Avg Dist:  2.83 km | Avg CO2: 0.339 kg | Avg Cost:     8487 VND | Orders: 176
+  [Off-Peak] [Full Multimodal     ] Avg Time:   5.66 min | Avg Dist:  2.83 km | Avg CO2: 0.339 kg | Avg Cost:     8487 VND | Orders: 176
+  [Off-Peak] [Road + Metro        ] Avg Time:   5.66 min | Avg Dist:  2.83 km | Avg CO2: 0.339 kg | Avg Cost:     8487 VND | Orders: 176
+  [Off-Peak] [Road + Waterbus     ] Avg Time:   5.66 min | Avg Dist:  2.83 km | Avg CO2: 0.339 kg | Avg Cost:     8487 VND | Orders: 176
+  [Off-Peak] [Road Only           ] Avg Time:   5.66 min | Avg Dist:  2.83 km | Avg CO2: 0.339 kg | Avg Cost:     8487 VND | Orders: 176
+  [Peak    ] [Central Full Multimodal] Avg Time:  14.03 min | Avg Dist:  2.85 km | Avg CO2: 0.328 kg | Avg Cost:     9244 VND | Orders: 176
+  [Peak    ] [Central Road + Metro] Avg Time:  14.03 min | Avg Dist:  2.85 km | Avg CO2: 0.328 kg | Avg Cost:     9244 VND | Orders: 176
+  [Peak    ] [Central Road + Waterbus] Avg Time:  14.14 min | Avg Dist:  2.83 km | Avg CO2: 0.339 kg | Avg Cost:     8487 VND | Orders: 176
+  [Peak    ] [Central Road Only   ] Avg Time:  14.14 min | Avg Dist:  2.83 km | Avg CO2: 0.339 kg | Avg Cost:     8487 VND | Orders: 176
+  [Peak    ] [Full Multimodal     ] Avg Time:  14.03 min | Avg Dist:  2.85 km | Avg CO2: 0.328 kg | Avg Cost:     9244 VND | Orders: 176
+  [Peak    ] [Road + Metro        ] Avg Time:  14.03 min | Avg Dist:  2.85 km | Avg CO2: 0.328 kg | Avg Cost:     9244 VND | Orders: 176
+  [Peak    ] [Road + Waterbus     ] Avg Time:  14.14 min | Avg Dist:  2.83 km | Avg CO2: 0.339 kg | Avg Cost:     8487 VND | Orders: 176
+  [Peak    ] [Road Only           ] Avg Time:  14.14 min | Avg Dist:  2.83 km | Avg CO2: 0.339 kg | Avg Cost:     8487 VND | Orders: 176
 
 [SECTION 2: % CẢI THIỆN SO VỚI ROAD ONLY (BASELINE)]
 ------------------------------------------------------------------------------------------
   [Off-Peak] [Full Multimodal     ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
   [Off-Peak] [Road + Metro        ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
   [Off-Peak] [Road + Waterbus     ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
-  [Peak    ] [Full Multimodal     ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
-  [Peak    ] [Road + Metro        ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
+  [Peak    ] [Full Multimodal     ] Thời gian: +0.8% | CO2: +3.4% | Chi phí: -8.9%
+  [Peak    ] [Road + Metro        ] Thời gian: +0.8% | CO2: +3.4% | Chi phí: -8.9%
   [Peak    ] [Road + Waterbus     ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
   [Off-Peak] [Central Full Multimodal] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
   [Off-Peak] [Central Road + Metro] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
   [Off-Peak] [Central Road + Waterbus] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
   [Off-Peak] [Central Road Only   ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
-  [Peak    ] [Central Full Multimodal] Thời gian: +9.5% | CO2: +26.1% | Chi phí: -53.4%
-  [Peak    ] [Central Road + Metro] Thời gian: +9.5% | CO2: +26.1% | Chi phí: -53.4%
+  [Peak    ] [Central Full Multimodal] Thời gian: +0.8% | CO2: +3.4% | Chi phí: -8.9%
+  [Peak    ] [Central Road + Metro] Thời gian: +0.8% | CO2: +3.4% | Chi phí: -8.9%
   [Peak    ] [Central Road + Waterbus] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
   [Peak    ] [Central Road Only   ] Thời gian: +0.0% | CO2: +0.0% | Chi phí: +0.0%
 
 [SECTION 3: MÔ PHỎNG CHI TIẾT ĐƠN HÀNG ĐẠI DIỆN — PEAK HOUR]
 ------------------------------------------------------------------------------------------
-  Đơn hàng: Order_116 | Hub xuất phát: 1 | Giờ: Peak (17:00)
-
-  >> Kịch bản: Central Road Only
-     17:00:00  [DEPART]  Xuất phát từ 1
-     17:04:18  [ARRIVE]  Giao hàng thành công
-     Phương tiện sử dụng: road
-     Thời gian: 4.30 phút | Quãng đường: 0.86 km | CO2: 0.1032 kg | Chi phí: 2,580 VND
-
-  >> Kịch bản: Central Road + Metro
-     17:00:00  [DEPART]  Xuất phát từ 1
-     17:04:18  [ARRIVE]  Giao hàng thành công
-     Phương tiện sử dụng: road
-     Thời gian: 4.30 phút | Quãng đường: 0.86 km | CO2: 0.1032 kg | Chi phí: 2,580 VND
-
-  >> Kịch bản: Central Road + Waterbus
-     17:00:00  [DEPART]  Xuất phát từ 1
-     17:04:18  [ARRIVE]  Giao hàng thành công
-     Phương tiện sử dụng: road
-     Thời gian: 4.30 phút | Quãng đường: 0.86 km | CO2: 0.1032 kg | Chi phí: 2,580 VND
-
-  >> Kịch bản: Central Full Multimodal
-     17:00:00  [DEPART]  Xuất phát từ 1
-     17:04:18  [ARRIVE]  Giao hàng thành công
-     Phương tiện sử dụng: road
-     Thời gian: 4.30 phút | Quãng đường: 0.86 km | CO2: 0.1032 kg | Chi phí: 2,580 VND
-
 
 [SECTION 4: THỐNG KÊ PHÂN PHỐI KẾT QUẢ]
 ------------------------------------------------------------------------------------------
-  Tổng đơn hoàn thành routing: 292
-  Road Only (Peak) — min: 0.1 | max: 16.7 | std: 5.94 phút
-  Multimodal (Peak) — min: 0.1 | max: 16.7 | std: 5.94 phút
+  Tổng đơn hoàn thành routing: 176
+  Road Only (Peak) — min: 0.2 | max: 20.2 | std: 3.60 phút
+  Multimodal (Peak) — min: 0.2 | max: 19.8 | std: 3.49 phút
 
 ==========================================================================================
                      END OF SIMULATION LOG

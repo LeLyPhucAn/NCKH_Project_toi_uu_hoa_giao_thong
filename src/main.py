@@ -40,8 +40,8 @@ def main():
     if G is None:
         G = build_graph(metro, metro_edges, waterbus, hubs, orders, graph_path)
 
-    # 3. Chọn Hub tối ưu bằng K-Medoids toàn cục (chọn 3 Hub trong 6 Hub gần Q1)
-    selected_hubs = select_hub(hubs, orders, num_hubs=3)
+    # 3. Chọn Hub tối ưu bằng K-Medoids toàn cục (chọn 5 Hub trong 30 Hub khắp TP.HCM)
+    selected_hubs = select_hub(hubs, orders, num_hubs=5)
 
     # 4. Giải bài toán lộ trình VRP chặng cuối bằng Google OR-Tools kết hợp dự báo tốc độ AI
     vrp = VRPSolver(base_dir=base_dir)
